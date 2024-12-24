@@ -1,14 +1,48 @@
 <nav>
     <ul class="nav-list">
         <li><a href="/"><i class="fa-solid fa-house"></i>Home</a></li>
+        {{ if .IsAuthenticated}}
+        <li><a href="/mycreatedposts"><i class="fa-regular fa-star"></i></i>My Posts</a></li>
+        <li><a href="/mylikedposts"><i class="fa-regular fa-heart"></i></i>Liked Posts</a></li>
+        {{end}}
         <li>
             <span class="categories-title"><i class="fa-solid fa-list"></i>Categories</span>
+            {{if .Categories}}
             <ul class="categories-list">
                 {{range .Categories}}
                 <li><a href="/category/{{.ID}}">#{{.Label}} ({{.PostsCount}})</a></li>
                 {{end}}
             </ul>
+            {{else}}
+            <p class="no-categories">No categories available.</p>
+            {{end}}
         </li>
-        <li><a href="/about"><i class="fa-solid fa-circle-info"></i>About</a></li>
+    </ul>
+</nav>
+
+<!-- mobile nav -->
+
+<nav class="mobile-nav">
+    <button class="close-nav" onclick="closeMobileNav()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul class="nav-list">
+        <li><a href="/"><i class="fa-solid fa-house"></i>Home</a></li>
+        {{ if .IsAuthenticated}}
+        <li><a href="/mycreatedposts"><i class="fa-regular fa-star"></i></i>My Posts</a></li>
+        <li><a href="/mylikedposts"><i class="fa-regular fa-heart"></i></i>Liked Posts</a></li>
+        {{end}}
+        <li>
+            <span class="categories-title"><i class="fa-solid fa-list"></i>Categories</span>
+            {{if .Categories}}
+            <ul class="categories-list">
+                {{range .Categories}}
+                <li><a href="/category/{{.ID}}">#{{.Label}} ({{.PostsCount}})</a></li>
+                {{end}}
+            </ul>
+            {{else}}
+            <p class="no-categories">No categories available.</p>
+            {{end}}
+        </li>
     </ul>
 </nav>

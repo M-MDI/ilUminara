@@ -3,80 +3,107 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
+	"html"
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
-	"forum/server/utils"
+	"forum/server/models"
 )
 
 func CreateComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
-	var user_id int
-	var valid bool
-	var username string
-
-	if user_id, username, valid = ValidSession(r, db); !valid {
-		w.WriteHeader(401)
-		http.Redirect(w, r, "/login", http.StatusFound)
+	// Validate session
+	userID, username, valid := models.ValidSession(r, db)
+	if !valid {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
+	// Validate method
 	if r.Method != http.MethodPost {
-		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, valid, username)
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Parse form data
+	if err := r.ParseForm(); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	content := html.EscapeString(strings.TrimSpace(r.FormValue("comment")))
+	postIDStr := r.FormValue("postid")
+	postID, err := strconv.Atoi(postIDStr)
+	if err != nil || content == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	// Store the comment using the models package
+	commentID, err := models.StoreComment(db, userID, postID, content)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// Fetch additional details using the models package
+	commentsCount, err := models.CountCommentsByPostID(db, postID)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	commentTime, err := models.FetchCommentTimeByID(db, commentID)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// Return the new comment details as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"ID":            commentID,
+		"username":      username,
+		"created_at":    commentTime,
+		"content":       content,
+		"likes":         0,
+		"dislikes":      0,
+		"commentscount": commentsCount,
+	})
+}
+
+func ReactToComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(405)
+		return
+	}
+
+	var user_id int
+	var valid bool
+
+	if user_id, _, valid = models.ValidSession(r, db); !valid {
+		w.WriteHeader(401)
 		return
 	}
 
 	if err := r.ParseForm(); err != nil {
-		http.Error(w, "Invalid form data", http.StatusBadRequest)
-		return
-	}
-	content := r.FormValue("comment")
-	id := r.FormValue("postid")
-	postid, err := strconv.Atoi(id)
-	if err != nil || strings.TrimSpace(content) == "" {
 		w.WriteHeader(400)
-		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
 	}
-	comm_id, err := AddComment(db, user_id, postid, content)
+
+	userReaction := r.FormValue("reaction")
+	id := r.FormValue("comment_id")
+	comment_id, err := strconv.Atoi(id)
 	if err != nil {
-		http.Error(w, "Cannot add comment, try again!", http.StatusBadRequest)
+		w.WriteHeader(400)
 		return
 	}
-	// http.Redirect(w, r, "/post/"+strconv.Itoa(postid), http.StatusFound)
-
-	var commentscount int
-	err2 := db.QueryRow("SELECT COUNT(*) FROM comments WHERE post_id = ?", postid).Scan(&commentscount)
-	if err2 != nil {
-		fmt.Println(err)
-		utils.RenderError(db, w, r, 500, valid, username)
+	likeCount, dislikeCount, err := models.ReactToComment(db, user_id, comment_id, userReaction)
+	if err != nil {
+		w.WriteHeader(500)
 		return
 	}
-
 	// Return the new count as JSON
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"ID":            comm_id,
-		"username":      username,
-		"created_at":    time.Now().Format("15:04 02/01/2006"),
-		"content":       content,
-		"likes":         0,
-		"dislikes":      0,
-		"commentscount": commentscount,
-	})
-}
-
-func AddComment(db *sql.DB, user_id, post_id int, content string) (int64, error) {
-	task := `INSERT INTO comments (user_id,post_id,content) VALUES (?,?,?)`
-
-	result, err := db.Exec(task, user_id, post_id, content)
-	if err != nil {
-		return 0, fmt.Errorf("%v", err)
-	}
-
-	commentID, _ := result.LastInsertId()
-
-	return commentID, nil
+	json.NewEncoder(w).Encode(map[string]int{"commentlikesCount": likeCount, "commentdislikesCount": dislikeCount})
 }

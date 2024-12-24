@@ -18,8 +18,9 @@
 
     --container-width-lg: 75%;
     --container-width-md: 86%;
-    --container-width-ms: 80%;
+    --container-width-sm: 95%;
 }
+
 
 
 /* Global style */
@@ -78,11 +79,12 @@ header {
     height: 65px;
     display: flex;
     align-items: center;
-    background-color: var(--color-bg);
+    /* background-color: var(--color-bg); */
+    backdrop-filter: blur(2px);
     justify-content: space-between;
     padding: 0 1rem;
     border-bottom: 1px solid var(--color-border);
-    z-index: 1;
+    z-index: 2;
 }
 
 header a {
@@ -125,10 +127,208 @@ header:first-child {
     background-color: var(--color-primary-hover);
 }
 
+.header-user {
+    margin-right: 2.5rem;
+    display: flex;
+}
+
+
+.header-username {
+    border: solid 1px var(--color-border);
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+    padding: 8px 20px;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+.header-username i {
+    font-size: 0.9 rem;
+    margin-right: 8px;
+}
+
+.logout-link {
+    text-decoration: none;
+    /* background-color: ; */
+    padding: 8px 15px;
+    color: rgb(187, 0, 0);
+    border: solid 1px rgb(187, 0, 0);
+    border-radius: 0 10px 10px 0;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.logout-link i {
+    margin-left: 10px;
+}
+
+.logout-link:hover {
+    background-color: rgb(187, 0, 0);
+    color: var(--color-white);
+}
+
 /* container style */
 .container {
     display: flex;
     flex-direction: column;
     padding-top: 65px;
     margin-left: 320px;
+    min-height: 80vh;
+}
+
+/* footer style */
+
+.footer-container {
+    display: flex;
+    border-top: 3px solid var(--color-border);
+    background-color: var(--color-bg-variant);
+
+}
+
+.hidden-footer {
+    width: 300px;
+}
+
+footer {
+    width: 100%;
+    background-color: var(--color-bg-variant);
+    color: var(--color-text);
+    padding: 20px 10px;
+    text-align: center;
+}
+
+footer div {
+    margin-bottom: 10px;
+}
+
+footer span {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.footer-team {
+    margin-top: 15px;
+}
+
+.footer-team a {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-size: 14px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 10px;
+    transition: var(--transition);
+}
+
+.footer-team a:hover {
+    color: var(--color-primary-hover);
+    transform: scale(1.1);
+}
+
+.footer-team img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+
+/* ================= medium style  ================== */
+@media screen and (max-width: 1024px) {
+    .container {
+        margin-left: 200px;
+    }
+
+    .hidden-footer {
+        width: 200px;
+    }
+
+    footer {
+        width: 75%;
+    }
+}
+
+/* ================= small style ================== */
+@media screen and (max-width: 600px) {
+    .container {
+        margin-left: 0px;
+        align-items: center;
+    }
+
+    header {
+        height: 50px;
+    }
+
+    .forum-title {
+        font-size: 1rem;
+    }
+
+    .img-01 {
+        width: 30px;
+    }
+
+    .login-link {
+        margin-right: 2.3rem;
+        padding: 5px 15px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+    }
+
+    .login-link i {
+        margin-left: 8px;
+    }
+
+    .header-user {
+        margin-right: 2.5rem;
+        display: flex;
+    }
+
+
+    .header-username {
+        padding: 5px 15px;
+        font-size: 0.9rem;
+    }
+
+    .header-username i {
+        font-size: 0.7rem;
+    }
+
+    .logout-link {
+        padding: 5px 12px;
+        font-size: 0.9rem;
+    }
+
+    .logout-link i {
+        margin-left: 5px;
+    }
+
+    .container {
+        padding-top: 50px;
+    }
+
+    .hidden-footer {
+        width: 0;
+    }
+
+    footer {
+        width: 100%;
+    }
+
+    .footer-team a {
+        font-size: 12px;
+        margin: 0 10px;
+    }
+
+    footer div {
+        margin-bottom: 0px;
+        font-size: 12px;
+
+    }
+
+    footer span {
+        font-size: 13px;
+    }
 }

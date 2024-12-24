@@ -1,5 +1,0 @@
-trimspace in entries
-
-check passwords befor login
-
-

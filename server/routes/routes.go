@@ -20,6 +20,13 @@ func Routes(db *sql.DB) http.Handler {
 	mux.HandleFunc("/category/{id}", func(w http.ResponseWriter, r *http.Request) {
 		controllers.IndexPostsByCategory(w, r, db)
 	})
+	mux.HandleFunc("/mycreatedposts", func(w http.ResponseWriter, r *http.Request) {
+		controllers.MyCreatedPosts(w, r, db)
+	})
+	
+	mux.HandleFunc("/mylikedposts", func(w http.ResponseWriter, r *http.Request) {
+		controllers.MyLikedPosts(w, r, db)
+	})
 	mux.HandleFunc("/post/{id}", func(w http.ResponseWriter, r *http.Request) {
 		controllers.ShowPost(w, r, db)
 	})
@@ -28,11 +35,10 @@ func Routes(db *sql.DB) http.Handler {
 		controllers.CreateComment(w, r, db)
 	})
 
-
 	mux.HandleFunc("/post/create", func(w http.ResponseWriter, r *http.Request) {
 		controllers.GetPostCreationForm(w, r, db)
 	})
-	
+
 	mux.HandleFunc("/post/createpost", func(w http.ResponseWriter, r *http.Request) {
 		controllers.CreatePost(w, r, db)
 	})
@@ -52,21 +58,21 @@ func Routes(db *sql.DB) http.Handler {
 	mux.HandleFunc("/signup", func(w http.ResponseWriter, r *http.Request) {
 		controllers.Signup(w, r, db)
 	})
-	
+
 	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		controllers.GetLogin(w, r, db)
+		controllers.GetLoginPage(w, r, db)
 	})
 
 	mux.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 		controllers.Logout(w, r, db)
 	})
 
-	mux.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		controllers.GetRegister(w, r, db)
-	})
 
-	// mux.HandleFunc("/500", controllers.InternalServerError)
-	// mux.HandleFunc("/about", controllers.GetAbout)
+
+
+	mux.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		controllers.GetRegisterPage(w, r, db)
+	})
 
 	return mux
 }
