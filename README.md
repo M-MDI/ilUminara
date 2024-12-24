@@ -4,11 +4,9 @@ A comprehensive web forum application built using Go that enables user communica
 
 ## Authors
 
-- Abdelhamid Bouziani
-- Hamza Maach
-- Omar Ait Benhammou
+
 - Mehdi Moulabbi
-- Youssef Basta
+
 
 ## Features
 
