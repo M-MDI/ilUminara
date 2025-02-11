@@ -17,32 +17,16 @@ func main() {
 		log.Fatalf("Too many arguments")
 	}
 
-	// Check if running in Docker
-	isDocker := os.Getenv("BASE_PATH") != ""
-	if isDocker {
-		config.BasePath = os.Getenv("BASE_PATH")
-	}
-
 	// Connect to the database
 	db, err := config.Connect()
 	if err != nil {
-		log.Fatal("Database connection error:", err)
+		log.Println("Database connection error:", err)
 	}
+	defer db.Close()
 
-	// Handle database setup based on environment
-	if isDocker {
-		// Create the database schema and demo data
-		err := config.CreateDemoData(db)
-		if err != nil {
-			log.Fatalf("Error creating the database schema and demo data: %v", err)
-		}
-		log.Println("Database setup complete.")
-	} else {
-		// Create only the database schema
-		err := config.CreateTables(db)
-		if err != nil {
-			log.Fatalf("Error creating the database schema: %v", err)
-		}
+	err = config.CreateTables(db)
+	if err != nil {
+		log.Printf("Error creating the database schema: %v\n", err)
 	}
 
 	// Start the HTTP server

@@ -4,9 +4,11 @@ A comprehensive web forum application built using Go that enables user communica
 
 ## Authors
 
-
+- Abdelhamid Bouziani
+- Hamza Maach
+- Omar Ait Benhammou
 - Mehdi Moulabbi
-
+- Youssef Basta
 
 ## Features
 
@@ -45,6 +47,7 @@ forum/
 │   └── templates/        # HTML templates
 ├── dockerfile            # Docker containerization
 ├── commands.sh           # Docker build and deployment script
+├── prune.sh              # remove unused objects
 ├── go.mod                # Go module dependencies
 ├── go.sum                # Dependency checksum
 └── README.md             # Project documentation
@@ -99,24 +102,9 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
    go mod download
    ```
 
-3. **Database Management**
 
-   - Create database schema:
-     ```bash
-     go run . --migrate
-     ```
 
-   - Create schema with demo data:
-     ```bash
-     go run . --seed
-     ```
-
-   - Drop database schema:
-     ```bash
-     go run . --drop
-     ```
-
-4. **Run the Application**
+3. **Run the Application**
    ```bash
    cd cmd
    go run .
@@ -137,6 +125,12 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
    ```
 
 3. Access the forum at `http://localhost:8080`
+
+
+4. To delete created images and containers, run the script:
+   ```bash
+   ./prune.sh
+   ```
 
 ## Contributing
 

@@ -10,7 +10,7 @@ import (
 func Routes(db *sql.DB) http.Handler {
 	mux := http.NewServeMux()
 
-	// serve static files
+	// Serve static files
 	mux.HandleFunc("/assets/", controllers.ServeStaticFiles)
 
 	// routes to get pages
@@ -66,9 +66,6 @@ func Routes(db *sql.DB) http.Handler {
 	mux.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 		controllers.Logout(w, r, db)
 	})
-
-
-
 
 	mux.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		controllers.GetRegisterPage(w, r, db)
