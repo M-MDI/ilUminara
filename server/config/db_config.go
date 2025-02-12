@@ -16,5 +16,6 @@ func Connect() (*sql.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to ping database: %v", err)
 	}
+	
 	return db, nil
 }
