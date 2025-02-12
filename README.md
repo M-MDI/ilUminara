@@ -4,11 +4,7 @@ A comprehensive web forum application built using Go that enables user communica
 
 ## Authors
 
-- Abdelhamid Bouziani
-- Hamza Maach
-- Omar Ait Benhammou
-- Mehdi Moulabbi
-- Youssef Basta
+- M-MDI
 
 ## Features
 
@@ -93,7 +89,7 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/hmaach/forum.git
+   git clone https://github.com/M-MDI/ilUminara.git
    cd forum
    ```
 
