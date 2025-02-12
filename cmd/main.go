@@ -22,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Println("Database connection error:", err)
 	}
+
 	defer db.Close()
 
 	err = config.CreateTables(db)
@@ -39,4 +40,5 @@ func main() {
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal("Server error:", err)
 	}
+	
 }
