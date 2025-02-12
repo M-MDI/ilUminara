@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Build a new image
 docker build --no-cache -f dockerfile -t forum-img .
 
