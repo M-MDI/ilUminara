@@ -13,6 +13,7 @@ type Category struct {
 }
 
 func FetchCategories(db *sql.DB) ([]Category, error) {
+
 	var categories []Category
 	query := `
 		SELECT
@@ -33,16 +34,20 @@ func FetchCategories(db *sql.DB) ([]Category, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer rows.Close()
+	
 	for rows.Next() {
 		var category Category
 		rows.Scan(&category.ID, &category.Label, &category.PostsCount)
 		categories = append(categories, category)
 	}
+	
 	return categories, nil
 }
 
 func CheckCategories(db *sql.DB, ids []int) error {
+
 	placeholders := strings.Repeat("?,", len(ids))
 	placeholders = placeholders[:len(placeholders)-1]
 
@@ -61,8 +66,10 @@ func CheckCategories(db *sql.DB, ids []int) error {
 	if err != nil {
 		return err
 	}
+
 	defer rows.Close()
 	var count int
+	
 	for rows.Next() {
 		var id int
 		if err := rows.Scan(&id); err != nil {
@@ -70,6 +77,7 @@ func CheckCategories(db *sql.DB, ids []int) error {
 		}
 		count++
 	}
+	
 	if count != len(ids) {
 		return fmt.Errorf("categories does not exists in db")
 	}
