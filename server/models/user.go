@@ -8,12 +8,15 @@ import (
 )
 
 func GetUserInfo(db *sql.DB, username string) (int, string, error) {
+
 	var user_id int
 	var hashedPassword string
+	
 	err := db.QueryRow("SELECT id,password FROM users WHERE username = ?", username).Scan(&user_id, &hashedPassword)
 	if err != nil {
 		return 0, "", err
 	}
+	
 	return user_id, hashedPassword, nil
 }
 
