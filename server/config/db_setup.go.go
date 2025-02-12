@@ -64,6 +64,8 @@ func CreateDemoData(db *sql.DB) error {
 		log.Printf("failed to isert demo data %q: %v\n", queries, err)
 		return err
 	}
+
 	log.Println("Demo data created successfully")
+	
 	return nil
 }
