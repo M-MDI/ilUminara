@@ -15,6 +15,7 @@ import (
 )
 
 func GetLoginPage(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	if r.Method != http.MethodGet {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, false, "")
 		return
@@ -32,15 +33,18 @@ func GetLoginPage(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		utils.RenderError(db, w, r, http.StatusInternalServerError, false, "")
 		return
 	}
+
 }
 
 func Signin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	if r.Method != http.MethodPost {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, false, "")
 		return
 	}
 
 	var valid bool
+
 	if _, _, valid = models.ValidSession(r, db); valid {
 		w.WriteHeader(302)
 		return
@@ -82,6 +86,7 @@ func Signin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		log.Println("Failed to create session")
 		return
 	}
+
 	sessionID := sessionId.String()
 
 	err = models.StoreSession(db, user_id, sessionID, time.Now().Add(10*time.Hour))
@@ -100,9 +105,11 @@ func Signin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		Path:     "/",
 	})
 	http.Redirect(w, r, "/", http.StatusFound)
+
 }
 
 func Logout(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	userID, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodPost {
@@ -131,4 +138,5 @@ func Logout(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 
 	http.Redirect(w, r, "/", http.StatusFound)
+	
 }
