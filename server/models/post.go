@@ -123,6 +123,7 @@ func FetchPosts(db *sql.DB, currentPage int) ([]Post, int, error) {
 }
 
 func FetchPost(db *sql.DB, postID int) (PostDetail, int, error) {
+
 	var post Post
 	post.ID = postID
 
@@ -197,10 +198,13 @@ func FetchPost(db *sql.DB, postID int) (PostDetail, int, error) {
 		Post:     post,
 		Comments: comments,
 	}, 200, nil
+
 }
 
 func FetchPostsByCategory(db *sql.DB, categoryID int, currentpage int) ([]Post, int, error) {
+
 	var posts []Post
+
 	query := `
 		SELECT
 			p.id,
@@ -258,7 +262,9 @@ func FetchPostsByCategory(db *sql.DB, categoryID int, currentpage int) ([]Post, 
 		log.Println("Error executing query:", err)
 		return nil, 500, err
 	}
+	
 	defer rows.Close()
+	
 	for rows.Next() {
 		var post Post
 		err := rows.Scan(&post.ID,
@@ -294,6 +300,7 @@ func FetchPostsByCategory(db *sql.DB, categoryID int, currentpage int) ([]Post, 
 }
 
 func FetchCreatedPostsByUser(db *sql.DB, user_id int, currentPage int) ([]Post, int, error) {
+	
 	var posts []Post
 
 	// Query to fetch posts
@@ -352,6 +359,7 @@ func FetchCreatedPostsByUser(db *sql.DB, user_id int, currentPage int) ([]Post, 
 		log.Println("Error executing query:", err)
 		return nil, 500, err
 	}
+	
 	defer rows.Close()
 
 	// Iterate through the rows
@@ -379,6 +387,7 @@ func FetchCreatedPostsByUser(db *sql.DB, user_id int, currentPage int) ([]Post, 
 		// post.CreatedAt = utils.FormatTime(post.CreatedAt)
 
 		// Append the Post struct to the posts slice
+	
 		posts = append(posts, post)
 	}
 
@@ -451,6 +460,7 @@ func FetchLikedPostsByUser(db *sql.DB, user_id int, currentPage int) ([]Post, in
 		log.Println("Error executing query:", err)
 		return nil, 500, err
 	}
+	
 	defer rows.Close()
 
 	// Iterate through the rows
@@ -491,6 +501,7 @@ func FetchLikedPostsByUser(db *sql.DB, user_id int, currentPage int) ([]Post, in
 }
 
 func StorePost(db *sql.DB, user_id int, title, content string) (int64, error) {
+	
 	query := `INSERT INTO posts (user_id,title,content) VALUES (?,?,?)`
 
 	result, err := db.Exec(query, user_id, title, content)
@@ -504,6 +515,7 @@ func StorePost(db *sql.DB, user_id int, title, content string) (int64, error) {
 }
 
 func StorePostCategory(db *sql.DB, post_id int64, category_id int) (int64, error) {
+	
 	query := `INSERT INTO post_category (post_id, category_id) VALUES (?,?)`
 
 	result, err := db.Exec(query, post_id, category_id)
@@ -517,6 +529,7 @@ func StorePostCategory(db *sql.DB, post_id int64, category_id int) (int64, error
 }
 
 func StorePostReaction(db *sql.DB, user_id, post_id int, reaction string) (int64, error) {
+	
 	query := `INSERT INTO post_reactions (user_id,post_id,reaction) VALUES (?,?,?)`
 	result, err := db.Exec(query, user_id, post_id, reaction)
 	if err != nil {
@@ -528,9 +541,11 @@ func StorePostReaction(db *sql.DB, user_id, post_id int, reaction string) (int64
 }
 
 func ReactToPost(db *sql.DB, user_id, post_id int, userReaction string) (int, int, error) {
+	
 	var likeCount, dislikeCount int
 	var dbreaction string
 	var err error
+	
 	db.QueryRow("SELECT reaction FROM post_reactions WHERE user_id=? AND post_id=?", user_id, post_id).Scan(&dbreaction)
 
 	if dbreaction == "" {
