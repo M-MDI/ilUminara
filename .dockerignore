@@ -1,7 +1,6 @@
 # Ignore the database file if it exists
 server/database/database.db
 
-
 # Ignore version control system directories
 .git
 .gitignore
@@ -11,11 +10,8 @@ server/database/database.db
 Dockerfile
 .dockerignore
 
-
-
 # Ignore the commands script as it's not needed inside the container
 commands.sh
-
 
 # Ignore the README as it's not needed in the image
 README.md
