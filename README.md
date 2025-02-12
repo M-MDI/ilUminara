@@ -9,19 +9,23 @@ A comprehensive web forum application built using Go that enables user communica
 ## Features
 
 ### User Authentication
+
 - Username-based registration and login
 - Secure session management using cookies
 
 ### Content Management
+
 - Create and read posts
 - Comment on posts
 - Multiple category associations for posts
 
 ### Interaction System
+
 - Like/dislike functionality for posts and comments
 - Comprehensive user engagement tools
 
 ### Content Discovery
+
 - Filter posts by categories
 - Filter posts by creation date
 
@@ -54,6 +58,7 @@ forum/
 View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagrams/forum-db).
 
 ### Key Tables
+
 - **Users**: User authentication and profile information
 - **Posts**: Forum post content
 - **Comments**: Post responses and discussions
@@ -65,22 +70,26 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
 
 ## Technologies
 
+- ...
+
 ### Backend
+
 - Go 1.22+
 - SQLite3 database
 - bcrypt for password hashing
 
 ### Frontend
+
 - HTML5 & CSS3
 - JavaScript
 - Font Awesome icons
 
 ### Development & Deployment
+
 - Docker containerization
 
-## Getting Started
-
 ### Prerequisites
+
 - Go 1.22 or higher
 - SQLite3
 - Docker (optional)
@@ -98,14 +107,11 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
    go mod download
    ```
 
-
-
 3. **Run the Application**
    ```bash
    cd cmd
    go run .
    ```
-   
    Access the forum at `http://localhost:8080`
 
 ### Docker Deployment
@@ -121,7 +127,6 @@ View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagr
    ```
 
 3. Access the forum at `http://localhost:8080`
-
 
 4. To delete created images and containers, run the script:
    ```bash
