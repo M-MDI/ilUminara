@@ -8,6 +8,7 @@ import (
 )
 
 func Routes(db *sql.DB) http.Handler {
+
 	mux := http.NewServeMux()
 
 	// Serve static files
@@ -72,4 +73,5 @@ func Routes(db *sql.DB) http.Handler {
 	})
 
 	return mux
+	
 }
