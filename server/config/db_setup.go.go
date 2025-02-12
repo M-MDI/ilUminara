@@ -10,6 +10,7 @@ import (
 
 // CreateTables executes all queries from schema.sql
 func CreateTables(db *sql.DB) error {
+	
 	content, err := os.ReadFile(BasePath + "server/database/sql/schema.sql")
 	if err != nil {
 		return fmt.Errorf("failed to read schema.sql file: %v", err)
@@ -24,6 +25,7 @@ func CreateTables(db *sql.DB) error {
 
 	// insert categories into database if not already exist
 	var catCount int
+
 	err = db.QueryRow(`SELECT COUNT(*) FROM categories`).Scan(&catCount)
 	if err != nil {
 		return fmt.Errorf("failed to get the count of categories: %v", err)
