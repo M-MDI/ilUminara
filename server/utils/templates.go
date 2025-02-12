@@ -38,7 +38,7 @@ func RenderError(db *sql.DB, w http.ResponseWriter, r *http.Request, statusCode 
 		w.Write([]byte(ErrorPageContents))
 		log.Println(err)
 	}
-	
+
 }
 
 func ParseTemplates(tmpl string) (*template.Template, error) {
@@ -56,11 +56,13 @@ func ParseTemplates(tmpl string) (*template.Template, error) {
 }
 
 func RenderTemplate(db *sql.DB, w http.ResponseWriter, r *http.Request, tmpl string, statusCode int, data any, isauth bool, username string) error {
+	
 	t, err := ParseTemplates(tmpl)
 	if err != nil {
 		return err
 	}
 	// Fetch categories for the navigation bar
+	
 	var categories []models.Category
 	if db != nil {
 		categories, err = models.FetchCategories(db)
@@ -75,6 +77,7 @@ func RenderTemplate(db *sql.DB, w http.ResponseWriter, r *http.Request, tmpl str
 		UserName:        username,
 		Categories:      categories,
 	}
+	
 	w.WriteHeader(statusCode)
 	// Execute the template with the provided data
 	err = t.ExecuteTemplate(w, tmpl+".html", globalData)
@@ -83,4 +86,5 @@ func RenderTemplate(db *sql.DB, w http.ResponseWriter, r *http.Request, tmpl str
 	}
 
 	return nil
+	
 }
