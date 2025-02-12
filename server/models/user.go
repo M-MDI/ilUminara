@@ -21,12 +21,14 @@ func GetUserInfo(db *sql.DB, username string) (int, string, error) {
 }
 
 func StoreUser(db *sql.DB, email, username, password string) (int64, error) {
+
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return -1, err
 	}
 
 	query := `INSERT INTO users (email,username,password) VALUES (?,?,?)`
+	
 	result, err := db.Exec(query, email, username, hashedPassword)
 	if err != nil {
 		return -1, fmt.Errorf("%v", err)
