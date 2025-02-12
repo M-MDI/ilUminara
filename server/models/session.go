@@ -49,6 +49,8 @@ func ValidSession(r *http.Request, db *sql.DB) (int, string, bool) {
 }
 
 func DeleteUserSession(db *sql.DB, userID int) error {
+	
 	_, err := db.Exec(`DELETE FROM sessions WHERE user_id = ?;`, userID)
+
 	return err
 }
