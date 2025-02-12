@@ -76,6 +76,7 @@ func CreateComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 }
 
 func ReactToComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	user_id, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodPost {
@@ -95,6 +96,7 @@ func ReactToComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	userReaction := r.FormValue("reaction")
 	id := r.FormValue("comment_id")
+
 	comment_id, err := strconv.Atoi(id)
 	if err != nil {
 		w.WriteHeader(400)
@@ -108,4 +110,5 @@ func ReactToComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	// Return the new count as JSON
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]int{"commentlikesCount": likeCount, "commentdislikesCount": dislikeCount})
+	
 }
