@@ -11,6 +11,7 @@ import (
 )
 
 func GetRegisterPage(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	if r.Method != http.MethodGet {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, false, "")
 		return
@@ -28,9 +29,11 @@ func GetRegisterPage(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		utils.RenderError(db, w, r, http.StatusInternalServerError, false, "")
 		return
 	}
+
 }
 
 func Signup(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	if r.Method != http.MethodPost {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, false, "")
 		return
@@ -52,6 +55,7 @@ func Signup(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	password := r.FormValue("password")
 	passwordConfirmation := r.FormValue("password-confirmation")
 	email = strings.ToLower(strings.TrimSpace(email))
+
 	if strings.Contains(username, " ") || len(strings.TrimSpace(username)) < 4 || len(password) < 6 || !utils.IsValidEmail(email) || password != passwordConfirmation {
 		w.WriteHeader(400)
 		return
@@ -67,6 +71,7 @@ func Signup(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		w.WriteHeader(500)
 		return
 	}
+	
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(200)
 }
