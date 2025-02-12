@@ -1,69 +1,69 @@
 /* Nav style */
 nav {
-    position: fixed;
-    background-color: var(--color-bg);
-    text-decoration: none;
-    width: 300px;
-    height: 100vh;
-    padding: 20px 0 0 10px;
-    margin-top: 65px;
-    border-right: 1px solid var(--color-border);
-    /* z-index: 1; */
+  position: fixed;
+  background-color: var(--color-bg);
+  text-decoration: none;
+  width: 300px;
+  height: 100vh;
+  padding: 20px 0 0 10px;
+  margin-top: 65px;
+  border-right: 1px solid var(--color-border);
+  /* z-index: 1; */
 }
 
 .close-nav {
-    display: none;
-    border-radius: 15px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    float: right;
+  display: none;
+  border-radius: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  float: right;
 }
 
 .close-nav i {
-    color: var(--color-text-light);
-    font-size: 1.4rem !important;
+  color: var(--color-text-light);
+  font-size: 1.4rem !important;
 }
 
 nav i {
-    font-size: 1rem;
-    display: inline-block;
-    margin: 1px 20px 0 10px;
+  font-size: 1rem;
+  display: inline-block;
+  margin: 1px 20px 0 10px;
 }
 
 .nav-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
 }
 
 .nav-list a {
-    display: inline-block;
-    width: 70%;
-    padding: 10px;
-    border-radius: 10px;
-    transition: var(--transition);
+  display: inline-block;
+  width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  transition: var(--transition);
 }
 
 .nav-list a:hover {
-    background-color: var(--color-bg-variant);
+  background-color: var(--color-bg-variant);
 }
 
-.nav-list>li>a,
+.nav-list > li > a,
 .categories-title {
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 400;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    transition: var(--transition);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
 }
 
 .categories-title {
-    padding: 10px;
+  padding: 10px;
 }
 
 /* .nav-list>li>a:hover,
@@ -72,68 +72,67 @@ nav i {
 } */
 
 .categories-list {
-    display: flex;
-    flex-direction: column;
-    margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 3rem;
 }
 
 .categories-list li {
-    /* border: red solid 1px; */
-    font-weight: 400;
-    font-size: 1rem;
-    list-style: none;
+  /* border: red solid 1px; */
+  font-weight: 400;
+  font-size: 1rem;
+  list-style: none;
 }
 
 .categories-list li a {
-    text-decoration: underline;
-    color: var(--color-text);
-    transition: var(--transition);
-    text-transform: capitalize;
+  text-decoration: underline;
+  color: var(--color-text);
+  transition: var(--transition);
+  text-transform: capitalize;
 }
 
-
 nav.mobile-nav {
-    display: none;
-    width: 80%;
-    height: fit-content;
-    max-height: 80vh;
-    padding: 10px;
-    margin-left: 7px;
-    background-color: transparent;
-    backdrop-filter: blur(16px);
-    padding: 10px;
-    margin-top: 60px;
-    border: 2px solid var(--color-border);
-    border-radius: 10px;
+  display: none;
+  width: 80%;
+  height: fit-content;
+  max-height: 80vh;
+  padding: 10px;
+  margin-left: 7px;
+  background-color: transparent;
+  backdrop-filter: blur(16px);
+  padding: 10px;
+  margin-top: 60px;
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
 }
 
 nav.mobile-nav .nav-list {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 nav.mobile-nav .close-nav {
-    display: block;
+  display: block;
 }
 
 /* ================= medium style  ================== */
 @media screen and (max-width: 1024px) {
-    nav {
-        width: 200px;
-        padding: 0;
-    }
+  nav {
+    width: 200px;
+    padding: 0;
+  }
 
-    .categories-list {
-        margin-left: 1rem;
-    }
+  .categories-list {
+    margin-left: 1rem;
+  }
 
-    .categories-list li a {
-        font-size: 0.9rem;
-    }
+  .categories-list li a {
+    font-size: 0.9rem;
+  }
 }
 
 /* ================= small style ================== */
 @media screen and (max-width: 600px) {
-    nav {
-        display: none;
-    }
+  nav {
+    display: none;
+  }
 }
