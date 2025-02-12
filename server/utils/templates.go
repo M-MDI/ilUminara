@@ -26,16 +26,19 @@ type Error struct {
 
 // RenderError handles error responses
 func RenderError(db *sql.DB, w http.ResponseWriter, r *http.Request, statusCode int, isauth bool, username string) {
+
 	typeError := Error{
 		Code:    statusCode,
 		Message: http.StatusText(statusCode),
 	}
+
 	if err := RenderTemplate(db, w, r, "error", statusCode, typeError, isauth, username); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Header().Set("Content-Type", "text/html")
 		w.Write([]byte(ErrorPageContents))
 		log.Println(err)
 	}
+	
 }
 
 func ParseTemplates(tmpl string) (*template.Template, error) {
