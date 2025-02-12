@@ -14,32 +14,38 @@ import (
 )
 
 func IndexPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	_, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, valid, username)
 		return
 	}
+
 	if r.URL.Path != "/" {
 		utils.RenderError(db, w, r, http.StatusNotFound, valid, username)
 		return
 	}
+
 	id := r.FormValue("PageID")
 	page, er := strconv.Atoi(id)
 	if er != nil && id != "" {
 		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
 	}
+
 	page = (page - 1) * 10
 	if page < 0 {
 		page = 0
 	}
+
 	posts, statusCode, err := models.FetchPosts(db, page)
 	if err != nil {
 		log.Println("Error fetching posts:", err)
 		utils.RenderError(db, w, r, statusCode, valid, username)
 		return
 	}
+
 	if posts == nil && page > 0 {
 		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
@@ -50,9 +56,11 @@ func IndexPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		utils.RenderError(db, w, r, http.StatusInternalServerError, valid, username)
 		return
 	}
+
 }
 
 func IndexPostsByCategory(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	_, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
@@ -74,6 +82,7 @@ func IndexPostsByCategory(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	pid := r.FormValue("PageID")
 	page, _ := strconv.Atoi(pid)
 	page = (page - 1) * 10
+
 	if page < 0 {
 		page = 0
 	}
@@ -95,9 +104,11 @@ func IndexPostsByCategory(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		utils.RenderError(db, w, r, http.StatusInternalServerError, valid, username)
 		return
 	}
+
 }
 
 func ShowPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	_, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
@@ -122,9 +133,11 @@ func ShowPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		log.Println(err)
 		utils.RenderError(db, w, r, http.StatusInternalServerError, valid, username)
 	}
+
 }
 
 func GetPostCreationForm(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	_, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
@@ -142,9 +155,11 @@ func GetPostCreationForm(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		utils.RenderError(db, w, r, http.StatusInternalServerError, valid, username)
 		return
 	}
+
 }
 
 func CreatePost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	user_id, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodPost {
@@ -176,6 +191,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 
 	var catidsInt []int
+
 	for i := range catids {
 		id, e := strconv.Atoi(catids[i])
 		if e != nil {
@@ -208,9 +224,11 @@ func CreatePost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(200)
+
 }
 
 func MyCreatedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+
 	user_id, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
@@ -224,21 +242,26 @@ func MyCreatedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 
 	id := r.FormValue("PageID")
+
 	page, er := strconv.Atoi(id)
 	if er != nil && id != "" {
 		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
 	}
+
 	page = (page - 1) * 10
+
 	if page < 0 {
 		page = 0
 	}
+
 	posts, statusCode, err := models.FetchCreatedPostsByUser(db, user_id, page)
 	if err != nil {
 		log.Println("Error fetching posts:", err)
 		utils.RenderError(db, w, r, statusCode, valid, username)
 		return
 	}
+
 	if posts == nil && page > 0 {
 		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
@@ -252,6 +275,7 @@ func MyCreatedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 }
 
 func MyLikedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	
 	user_id, username, valid := models.ValidSession(r, db)
 
 	if r.Method != http.MethodGet {
@@ -265,21 +289,26 @@ func MyLikedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 
 	id := r.FormValue("PageID")
+	
 	page, er := strconv.Atoi(id)
 	if er != nil && id != "" {
 		utils.RenderError(db, w, r, http.StatusBadRequest, valid, username)
 		return
 	}
+
 	page = (page - 1) * 10
+	
 	if page < 0 {
 		page = 0
 	}
+	
 	posts, statusCode, err := models.FetchLikedPostsByUser(db, user_id, page)
 	if err != nil {
 		log.Println("Error fetching posts:", err)
 		utils.RenderError(db, w, r, statusCode, valid, username)
 		return
 	}
+	
 	if posts == nil && page > 0 {
 		utils.RenderError(db, w, r, 404, valid, username)
 		return
@@ -293,6 +322,7 @@ func MyLikedPosts(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 }
 
 func ReactToPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	
 	if r.Method != http.MethodPost {
 		utils.RenderError(db, w, r, http.StatusMethodNotAllowed, false, "")
 		return
@@ -313,11 +343,13 @@ func ReactToPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	userReaction := r.FormValue("reaction")
 	id := r.FormValue("post_id")
+	
 	post_id, err := strconv.Atoi(id)
 	if err != nil {
 		w.WriteHeader(400)
 		return
 	}
+	
 	likeCount, dislikeCount, err := models.ReactToPost(db, user_id, post_id, userReaction)
 	if err != nil {
 		w.WriteHeader(500)
