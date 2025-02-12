@@ -42,6 +42,7 @@ function postreaction(postId, reaction) {
   };
   xhr.send(`reaction=${reaction}&post_id=${postId}`);
 }
+
 function commentreaction(commentid, reaction) {
   const logerror = document.getElementById("commenterrorlogin" + commentid);
   logerror.innerText = ``;
