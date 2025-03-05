@@ -16,7 +16,6 @@ func main() {
 	if len(os.Args) != 1 {
 		log.Fatalf("Too many arguments")
 	}
-
 	// Connect to the database
 	db, err := config.Connect()
 	if err != nil {
