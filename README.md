@@ -1,138 +1,95 @@
-# Forum Application
+## real-time-forum
 
-A comprehensive web forum application built using Go that enables user communication through posts, comments, and reactions.
+Remember the forum you did a while ago? Well it's time to make one even better also using JS, private messages, real time actions, live sharing video and live screen sharing too. Well, maybe not the last two. To get things straight there is a list below of what you will have to do.
 
-## Authors
+### Objectives
 
-- M-MDI
+On this project you will have to focus on a few points:
 
-## Features
+- Registration and Login
+- Creation of posts
+  - Commenting posts
+- Private Messages
 
-### User Authentication
+As you already did the first forum you can use part of the code, but not all of it. Your new forum will have five different parts:
 
-- Username-based registration and login
-- Secure session management using cookies
+- **SQLite**, in which you will store data, just like in the [previous forum](../forum/README.md#Communication)
+- **Golang**, in which you will handle data and Websockets (Backend)
+- **Javascript**, in which you will handle all the Frontend events and clients Websockets
+- **HTML**, in which you will organize the elements of the page
+- **CSS**, in which you will stylize the elements of the page
 
-### Content Management
+You will have only one HTML file, so every change of page you want to do, should be handled in the Javascript. This can be called having a [single page application](https://en.wikipedia.org/wiki/Single-page_application).
 
-- Create and read posts
-- Comment on posts
-- Multiple category associations for posts
+#### Registration and Login
 
-### Interaction System
+To be able to use the new and upgraded forum users will have to register and login, otherwise they will only see the registration or login page. This is premium stuff. The registration and login process should take in consideration the following features:
 
-- Like/dislike functionality for posts and comments
-- Comprehensive user engagement tools
+- Users must be able to fill a register form to register into the forum. They will have to provide at least:
+  - Nickname
+  - Age
+  - Gender
+  - First Name
+  - Last Name
+  - E-mail
+  - Password
+- The user must be able to connect using either the nickname or the e-mail combined with the password.
+- The user must be able to log out from any page on the forum.
 
-### Content Discovery
+#### Posts and Comments
 
-- Filter posts by categories
-- Filter posts by creation date
+This part is pretty similar to the first forum. Users must be able to:
 
-## Project Structure
+- Create posts
+  - Posts will have categories as in the first forum
+- Create comments on the posts
+- See posts in a feed display
+  - See comments only if they click on a post
 
-```
-forum/
-├── cmd/
-│   └── main.go           # Application entry point
-├── server/
-│   ├── config/           # Configuration management
-│   ├── database/         # Database interaction logic
-│   ├── controllers/      # Request handling and business logic
-│   ├── models/           # Data structures and models
-│   ├── routes/           # Application routing
-│   └── utils/            # Shared utility functions
-├── web/ 
-│   ├── assets/           # Static resources (CSS, JS, images)
-│   └── templates/        # HTML templates
-├── dockerfile            # Docker containerization
-├── commands.sh           # Docker build and deployment script
-├── prune.sh              # remove unused objects
-├── go.mod                # Go module dependencies
-├── go.sum                # Dependency checksum
-└── README.md             # Project documentation
-```
+#### Private Messages
 
-## Database Schema
+Users will be able to send private messages to each other, so you will need to create a chat, where it will exist :
 
-View the detailed database schema [here](https://drawsql.app/teams/zone-01/diagrams/forum-db).
+- A section to show who is online/offline and able to talk to:
 
-### Key Tables
+  - This section must be organized by the last message sent (just like discord). If the user is new and does not present messages you must organize it in alphabetic order.
+  - The user must be able to send private messages to the users who are online.
+  - This section must be visible at all times.
 
-- **Users**: User authentication and profile information
-- **Posts**: Forum post content
-- **Comments**: Post responses and discussions
-- **Categories**: Post classification
-- **Categories_Posts**: Post-category relationships
-- **Posts_Reactions**: Post interaction tracking
-- **Comments_Reactions**: Comment interaction tracking
-- **Sessions**: User authentication state management
+- A section that when clicked on the user that you want to send a message, reloads the past messages. Chats between users must:
 
-## Technologies
+  - Be visible, for this you will have to be able to see the previous messages that you had with the user
+  - Reload the last 10 messages and when scrolled up to see more messages you must provide the user with 10 more, without spamming the scroll event. **Do not forget what you learned!! (`Throttle`, `Debounce`)**
 
-- ...
+- Messages must have a specific format:
+  - A **`date`** that shows when the message was sent
+  - The **`user name`**, that identifies the user that sent the message
 
-### Backend
+As it is expected, the messages should work in real time, in other words, if a user sends a message, the other user should receive the notification of the new message without refreshing the page. Again this is possible through the usage of WebSockets in backend and frontend.
 
-- Go 1.22+
-- SQLite3 database
-- bcrypt for password hashing
+### Allowed Packages
 
-### Frontend
+- All [standard go](https://golang.org/pkg/) packages are allowed.
+- [Gorilla](https://pkg.go.dev/github.com/gorilla/websocket) websocket
+- [sqlite3](https://github.com/mattn/go-sqlite3)
+- [bcrypt](https://pkg.go.dev/golang.org/x/crypto/bcrypt)
+- [UUID](https://github.com/gofrs/uuid)
 
-- HTML5 & CSS3
-- JavaScript
-- Font Awesome icons
+> You must not use use any frontend libraries or frameworks like React, Angular, Vue etc.
 
-### Development & Deployment
+This project will help you learn about:
 
-- Docker containerization
-
-### Prerequisites
-
-- Go 1.22 or higher
-- SQLite3
-- Docker (optional)
-
-### Local Development
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/M-MDI/ilUminara.git
-   cd forum
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   go mod download
-   ```
-
-3. **Run the Application**
-   ```bash
-   cd cmd
-   go run .
-   ```
-   Access the forum at `http://localhost:8080`
-
-### Docker Deployment
-
-1. Make script executable:
-   ```bash
-   chmod +x commands.sh
-   ```
-
-2. Run deployment script:
-   ```bash
-   ./commands.sh
-   ```
-
-3. Access the forum at `http://localhost:8080`
-
-4. To delete created images and containers, run the script:
-   ```bash
-   ./prune.sh
-   ```
-
-## Contributing
-
-Please read our contributing guidelines before submitting pull requests or issues.
+- The basics of web :
+  - HTML
+  - HTTP
+  - Sessions and cookies
+  - CSS
+  - Backend and Frontend
+  - DOM
+- [Go routines](https://golangbot.com/goroutines/)
+- [Go channels](https://medium.com/rungo/anatomy-of-channels-in-go-concurrency-in-go-1ec336086adb)
+- [WebSockets](https://en.wikipedia.org/wiki/WebSocket):
+  - Go Websockets
+  - JS Websockets
+- SQL language
+  - Manipulation of databases
