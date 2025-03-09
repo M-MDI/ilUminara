@@ -216,25 +216,48 @@ body::before {
 /* Update post styling to match user list */
 .post {
   width: 100%;
-  padding: 1rem;
+  max-width: 800px;
+  padding: 1.5rem;
   background: var(--card-bg);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 12px rgba(163, 193, 218, 0.15);
   border: 1px solid rgba(163, 193, 218, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
   cursor: pointer;
-  transition: all var(--transition);
-  transform: translateZ(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .post:hover {
-  transform: translateZ(10px) scale(1.02);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(163, 193, 218, 0.2);
   background: var(--primary);
-  color: var(--bg);
-  border: none;
+  border-color: transparent;
+}
+
+.post::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(163, 193, 218, 0.03),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.post:hover::before {
+  opacity: 1;
 }
 
 .post:hover .title,
@@ -243,6 +266,7 @@ body::before {
 .post:hover .likes-wrapper,
 .post:hover .comments {
   color: var(--bg);
+  transition: color 0.3s ease;
 }
 
 /* Remove existing hover borders */
@@ -250,6 +274,30 @@ body::before {
 .post:nth-child(3n + 2):hover,
 .post:nth-child(3n + 3):hover {
   border-left: none;
+}
+
+/* Update post animations */
+.post {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .post {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    gap: 0.8rem;
+  }
 }
 
 .post-wrapper {
@@ -261,7 +309,7 @@ body::before {
   background-color: var(--card-bg);
   border-radius: var(--radius);
   border: 1px solid rgba(163, 193, 218, 0.2);
-  box-shadow: var(--shadow);
+  box-shadow: var (--shadow);
   margin-bottom: 10px;
   padding: 25px;
   transform-style: preserve-3d;
@@ -273,12 +321,51 @@ body::before {
   box-shadow: 0 10px 20px rgba(66, 103, 178, 0.15);
 }
 
+/* Improved post title styling */
 .title {
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--primary);
-  transform: translateZ(5px);
-  margin-bottom: 0.5rem;
+  margin: 0.5rem auto 1.5rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 0.8rem;
+  text-align: center;
+  width: 100%;
+  max-width: 90%;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(163, 193, 218, 0.3),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+.post:hover .title {
+  color: var(--bg);
+}
+
+.post:hover .title::after {
+  width: 70%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(246, 248, 213, 0.4),
+    transparent
+  );
 }
 
 .author {
@@ -317,6 +404,66 @@ body::before {
   color: var(--primary);
   transform: translateZ(2px);
   line-height: 1.5;
+}
+
+/* Update comments styling */
+.comments-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(163, 193, 218, 0.1);
+}
+
+.likes-dislikes-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.likes-wrapper,
+.comments {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  gap: 0.6rem;
+  background: rgba(163, 193, 218, 0.08);
+  border-radius: 20px;
+  padding: 0.6rem 1rem;
+  transition: all var(--transition);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.likes-wrapper:hover,
+.comments:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+  color: var(--bg);
+  box-shadow: 0 4px 12px rgba(163, 193, 218, 0.2);
+}
+
+.post:hover .likes-wrapper,
+.post:hover .comments {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Update comment icons */
+.comments svg,
+.likes-wrapper svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition);
+}
+
+.comments:hover svg,
+.likes-wrapper:hover svg {
+  transform: scale(1.1);
+}
+
+/* Add comment count styles */
+.comment-count {
+  font-weight: 600;
+  margin-left: 2px;
 }
 
 .comments-wrapper {
@@ -607,7 +754,7 @@ svg {
 .likes-wrapper svg {
   width: 16px;
   height: 16px;
-  color: var(--primary);
+  color: var (--primary);
 }
 
 .comments svg {
@@ -700,4 +847,205 @@ html {
 
 .online {
   animation: heartbeat 1.5s infinite;
+}
+
+/* Add nested comments styling */
+.comments-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(163, 193, 218, 0.1);
+}
+
+.comment-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid rgba(163, 193, 218, 0.1);
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+  cursor: pointer;
+  width: 95%;
+  margin-left: auto;
+}
+
+.comment-item:hover {
+  transform: translateY(-2px);
+  background: var(--primary);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(163, 193, 218, 0.2);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(163, 193, 218, 0.1);
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+}
+
+.comment-content {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.comment-username {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.comment-text {
+  font-size: 0.9rem;
+  color: var(--primary);
+  margin: 8px 0;
+}
+
+.comment-time {
+  font-size: 0.8rem;
+  color: rgba(163, 193, 218, 0.6);
+}
+
+/* Comment hover effects */
+.comment-item:hover .comment-username,
+.comment-item:hover .comment-text,
+.comment-item:hover .comment-time {
+  color: var(--bg);
+}
+
+/* Comment actions */
+.comment-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(163, 193, 218, 0.1);
+}
+
+.comment-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  background: rgba(163, 193, 218, 0.08);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.comment-action-btn:hover {
+  color: var(--bg);
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Nested comments styling */
+.nested-comments {
+  margin-left: 35px;
+  padding-left: 15px;
+  border-left: 2px solid rgba(163, 193, 218, 0.1);
+}
+
+/* Comment hover effects */
+.comment-item:hover .comment-username,
+.comment-item:hover .comment-text,
+.comment-item:hover .comment-time {
+  color: var(--bg);
+}
+
+/* Comment actions */
+.comment-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(163, 193, 218, 0.1);
+}
+
+.comment-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  background: rgba(163, 193, 218, 0.08);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.comment-action-btn:hover {
+  color: var(--bg);
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Nested comments */
+.nested-comments {
+  margin-left: 44px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(163, 193, 218, 0.1);
+}
+
+.nested-comments .comment-item {
+  background: rgba(163, 193, 218, 0.03);
+}
+
+/* Comment actions */
+.comment-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.comment-action-btn {
+  font-size: 0.8rem;
+  color: var(--primary);
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.comment-action-btn:hover {
+  color: var(--bg);
+  background: var(--primary);
+  border-radius: 12px;
+}
+
+/* Post hover effects for comments */
+.post:hover .comment-item {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.post:hover .comment-username,
+.post:hover .comment-text {
+  color: var(--bg);
+}
+
+.post:hover .comment-time {
+  color: rgba(246, 248, 213, 0.6);
+}
+
+.post:hover .nested-comments {
+  border-left-color: rgba(246, 248, 213, 0.2);
 }
