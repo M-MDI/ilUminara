@@ -4,31 +4,73 @@
   padding: 0;
 }
 
+:root {
+  /* Main Color Palette */
+  --primary: #3072a4; /* Deep blue - main brand color */
+  --secondary: #4f959d; /* Teal - secondary brand color */
+  --accent: #98d2c0; /* Mint - accent color */
+  --light: #f6f8d5; /* Cream - background color */
+  --mint-dark: #80cbc4; /* Dark mint - highlights */
+  --mint-light: #b4ebe6; /* Light mint - subtle accents */
+  --mint-medium: #66d2ce; /* Medium mint - interactive elements */
+
+  /* Functional Colors */
+  --text: #205781;
+  --text-light: #4f959d;
+  --text-lighter: #80cbc4;
+  --bg: #f6f8d5;
+  --white: #ffffff;
+  --hover: #66d2ce;
+
+  /* Utils */
+  --shadow: 0 2px 8px rgba(3, 135, 236, 0.1);
+  --radius: 8px;
+  --transition: 0.2s ease;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  background-color: #f0f2f5;
-  font-family: "Roboto", sans-serif;
+  background-color: var(--bg);
+  font-family: "Inter", sans-serif;
   height: 100vh;
+  perspective: 1000px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Performance optimizations */
+.logout-nav,
+.post,
+.post-wrapper,
+.new-post-btn {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .profile {
-  color: #050505;
+  color: var(--text);
 }
 
 #video-bg {
-  display: none; /* Disable video background for Facebook style */
+  display: none;
 }
 
 .logout-nav {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   height: 70px;
-  width: 100vw;
-  padding: 0 50px;
-  background-color: #ffffff;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transform: translateZ(5px);
+  color: var(--white);
 }
 
 .nav-right {
@@ -42,13 +84,15 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  transform-style: preserve-3d;
 }
 
 .content-wrapper {
   height: 90%;
-  display: none;
+  display: flex;
   justify-content: center;
   margin: 50px;
+  transform-style: preserve-3d;
 }
 
 .mid-section {
@@ -57,35 +101,55 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  transform-style: preserve-3d;
 }
 
 .right-panel {
   height: 100%;
   width: 20%;
   min-width: 200px;
+  transform: translateZ(10px);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.4)
+  );
+  border-radius: var(--radius);
+  backdrop-filter: blur(5px);
+  padding: 15px;
+  box-shadow: var(--shadow);
 }
 
 .logout-btn {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.2);
   border: none;
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--white);
+}
+
+.logout-btn:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .logout-btn img {
   height: 28px;
-}
-
-/* Make all SVG elements in the button as small as possible */
-.logout-btn svg {
-  width: 4px;
-  height: 4px;
+  filter: brightness(0) invert(1);
 }
 
 .logo {
   font-weight: 600;
   font-size: 1.8em;
-  color: #1877f2;
+  color: var(--white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateZ(5px);
+  letter-spacing: 1px;
 }
 
 #categories {
@@ -93,65 +157,85 @@ body {
   outline: none;
   background-color: transparent;
   margin-bottom: -5px;
-  color: #050505;
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .new-post-notif-wrapper {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 .new-post-popup {
-  padding: 10px;
-  background-color: #ffffff;
-  color: #050505;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 0.8rem;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--highlight), #ffe066);
+  color: #664d00;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  font-size: 0.9rem;
   position: fixed;
   margin-bottom: 40px;
+  animation: float 2s ease-in-out infinite;
+  transform: translateZ(20px);
+  font-weight: 500;
+  border: 1px solid rgba(255, 204, 0, 0.4);
 }
 
-/* Make all SVG elements in notifications as small as possible */
-.new-post-popup svg {
-  width: 4px;
-  height: 4px;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(20px);
+  }
+  50% {
+    transform: translateY(-8px) translateZ(20px);
+  }
 }
 
 .posts-container {
   display: flex;
-  flex-direction: column; /* Stack posts vertically */
-  align-items: center; /* Center posts */
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
   width: 100%;
+  transform-style: preserve-3d;
 }
 
 .post {
-  width: 100%; /* Full-width posts */
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ddd;
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(32, 87, 129, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 10px; /* Reduced margin for tighter stacking */
+  margin-bottom: 1rem;
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
+  transition: transform var(--transition);
+  transform: translateZ(0);
 }
 
 .post:hover {
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-left: 4px solid var(--mint-medium);
 }
 
-/* Make all SVG elements in posts as small as possible */
-.post svg {
-  width: 3px;
-  height: 3px;
+.post:nth-child(3n + 1):hover {
+  border-left: 4px solid var(--primary);
+}
+
+.post:nth-child(3n + 2):hover {
+  border-left: 4px solid var(--secondary);
+}
+
+.post:nth-child(3n + 3):hover {
+  border-left: 4px solid var(--mint-dark);
 }
 
 .post-wrapper {
@@ -159,59 +243,80 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 600px; /* Limit width for readability */
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
   margin-bottom: 10px;
   padding: 25px;
+  transform-style: preserve-3d;
+  transition: transform var(--transition);
+}
+
+.post-wrapper:hover {
+  transform: translateZ(15px);
+  box-shadow: 0 10px 20px rgba(66, 103, 178, 0.15);
 }
 
 .title {
   font-weight: 600;
-  font-size: 1rem;
-  color: #050505;
+  font-size: 1.1rem;
+  color: var(--primary);
+  transform: translateZ(5px);
+  margin-bottom: 0.5rem;
 }
 
 .author {
   display: flex;
   gap: 10px;
   align-items: center;
-  color: #606770;
-  font-size: 0.8rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
 }
 
 .author img {
-  height: 25px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateZ(8px);
+  border: 2px solid #fff;
+  object-fit: cover;
 }
 
 .column-wrapper {
   display: flex;
   flex-direction: column;
+  transform: translateZ(3px);
 }
 
 .post-username {
-  color: #050505;
+  color: var(--primary);
   font-weight: bold;
 }
 
 .post-body {
   height: auto;
-  margin-bottom: 15px;
+  margin: 15px 0;
   overflow-y: auto;
-  color: #050505;
+  color: var(--text);
+  transform: translateZ(2px);
+  line-height: 1.5;
 }
 
 .comments-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: -5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  transform: translateZ(5px);
 }
 
 .likes-dislikes-wrapper {
   display: flex;
+  gap: 10px;
 }
 
 .likes-wrapper,
@@ -219,106 +324,130 @@ body {
   display: flex;
   align-items: center;
   font-size: 0.8rem;
-  gap: 4px;
-  background-color: #f0f2f5;
+  gap: 0.5rem;
+  background: var(--mint-light);
   border-radius: 20px;
-  padding: 2px 8px;
+  padding: 0.4rem 0.8rem;
+  transition: background var(--transition);
+  color: var(--text);
 }
 
-/* Made SVGs even smaller than original */
-.likes-wrapper svg,
-.comments svg {
-  width: 3px; /* Even smaller than the original 6px */
-  height: 3px; /* Even smaller than the original 6px */
+.likes-wrapper:hover,
+.comments:hover {
+  background-color: var(--mint-medium);
+  transform: scale(1.05);
+  color: var(--white);
 }
 
 .new-post-btn {
-  background-color: #1877f2;
+  background: var(--secondary);
   border-radius: 20px;
   border: none;
-  color: #ffffff;
-  padding: 5px 10px;
+  color: var(--white);
+  padding: 0.6rem 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform var(--transition);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(225, 48, 108, 0.3);
+  transform: translateZ(8px);
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
 }
 
 .new-post-btn:hover {
-  background-color: #145dbf;
-}
-
-/* Make post button SVG very small */
-.new-post-btn svg {
-  width: 3px;
-  height: 3px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(225, 48, 108, 0.4);
+  background: var(--primary);
 }
 
 .users {
   margin-top: 15px;
-  margin-left: 15px;
+  transform-style: preserve-3d;
 }
 
 .online-list {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  color: #050505;
+  color: var(--primary);
+  padding: 10px 0;
+  transform: translateZ(5px);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .user {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin: 20px 0;
-  color: #050505;
+  gap: 0.8rem;
+  margin: 15px 0;
+  color: var(--text);
+  transition: background var(--transition);
+  transform: translateZ(0);
+  padding: 0.6rem;
+  border-radius: var(--radius);
+}
+
+.user:hover {
+  transform: translateZ(10px) scale(1.02);
+  background: var(--mint-medium);
+  color: var(--white);
 }
 
 .user img {
-  height: 25px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
-}
-
-/* Make any SVGs in user elements small */
-.user svg {
-  width: 3px;
-  height: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateZ(5px);
+  border: 2px solid #fff;
+  object-fit: cover;
 }
 
 .online {
   padding: 4.4px;
-  background-color: #31a24c;
-  border: 2px solid #ffffff;
+  background: var(--mint-dark);
+  border: 2px solid var(--white);
   border-radius: 50%;
   margin-left: -25px;
+  transform: translateZ(10px);
+  box-shadow: 0 0 0 2px #fff;
+  width: 8px;
+  height: 8px;
 }
 
 .msg-notification {
   font-size: 0.7rem;
-  color: #ffffff;
-  background-color: #e41e3f;
+  color: var(--white);
+  background-color: var(--mint-dark);
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 3px 6px;
   margin-left: 15px;
   margin-right: 15px;
+  transform: translateZ(15px);
+  box-shadow: 0 2px 5px rgba(128, 203, 196, 0.3);
+  font-weight: bold;
 }
 
 .back {
   display: flex;
   width: 100%;
   padding-left: 10px;
-  margin-bottom: -5px;
+  margin-bottom: 15px;
 }
 
 .back img {
   height: 25px;
   cursor: pointer;
+  transition: transform var(--transition);
+  color: var(--primary);
 }
 
-/* Make back button SVGs small */
-.back svg {
-  width: 3px;
-  height: 3px;
+.back img:hover {
+  transform: translateX(-5px);
 }
 
 .post-container {
@@ -326,44 +455,224 @@ body {
   min-width: 400px;
   max-width: 600px;
   margin-left: 100px;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-}
-
-/* Make any SVGs in post container small */
-.post-container svg {
-  width: 3px;
-  height: 3px;
+  transform-style: preserve-3d;
 }
 
 .category {
-  padding: 6px;
-  background-color: #e4e6eb;
-  color: #050505;
-  border-radius: 10px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, var(--secondary-color), #63c2ff);
+  color: var(--white);
+  border-radius: 20px;
   font-size: 0.8em;
+  transform: translateZ(5px);
+  transition: all var(--transition);
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(29, 161, 242, 0.2);
+}
+
+.category:hover {
+  transform: translateZ(8px) scale(1.05);
+  box-shadow: 0 3px 8px rgba(29, 161, 242, 0.3);
 }
 
 .send-comment {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 15px 20px;
   width: 90%;
-  background-color: #f0f2f5;
-  border-radius: 20px;
+  background-color: var(--mint-light);
+  border-radius: 25px;
+  transform: translateZ(5px);
+  transition: all var(--transition);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--mint-medium);
 }
 
-/* Make send comment SVGs small */
-.send-comment svg {
-  width: 3px;
-  height: 3px;
+.send-comment:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transform: translateZ(8px);
+  border-color: var(--primary);
+  background-color: var(--mint-light);
 }
 
-/* Global SVG size reduction for any other SVGs not covered above */
+/* Add 3D card flip effect for posts */
+.post-flip-container {
+  perspective: 1000px;
+  width: 100%;
+}
+
+.post.flippable {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.post.flippable:hover {
+  transform: rotateY(5deg) translateZ(10px);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin: 20px;
+    padding: 1rem;
+  }
+
+  .mid-section {
+    width: 100%;
+  }
+
+  .post-container {
+    width: 90%;
+    min-width: unset;
+    margin-left: 0;
+  }
+
+  .logout-nav {
+    padding: 0 20px;
+  }
+
+  .right-panel {
+    display: none;
+  }
+}
+
+/* CSS variables for dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #205781;
+    --secondary: #4f959d;
+    --accent: #98d2c0;
+    --bg: #1a1b1f;
+    --card-bg: #242526;
+    --text-color: #f6f8d5;
+    --secondary-text: #b4ebe6;
+  }
+
+  body {
+    background-image: linear-gradient(120deg, #1a1b1f 0%, #20242a 100%);
+  }
+
+  .right-panel {
+    background: rgba(32, 87, 129, 0.1);
+    backdrop-filter: blur(5px);
+  }
+
+  .post {
+    background: var(--card-bg);
+    border: 1px solid var(--mint-dark);
+  }
+}
+
+/* Optimized SVG rendering */
 svg {
-  width: 3px !important;
-  height: 3px !important;
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transform: translateZ(5px);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+}
+
+/* Fix SVG sizes */
+.likes-wrapper svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+}
+
+.comments svg {
+  width: 16px;
+  height: 16px;
+  color: var(--secondary);
+}
+
+.new-post-btn svg {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+.user svg,
+.back svg,
+.post svg,
+.post-container svg,
+.new-post-popup svg,
+.send-comment svg,
+.logout-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation for new content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post,
+.new-post-popup,
+.user {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Custom animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.msg-notification {
+  animation: pulse 2s infinite;
+}
+
+/* Remove rainbow and shine effects */
+.post:nth-child(7n)::before,
+.post::after {
+  display: none;
+}
+
+/* Notification heartbeat effect */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.online {
+  animation: heartbeat 1.5s infinite;
 }
