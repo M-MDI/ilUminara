@@ -7,8 +7,8 @@
 body {
   display: flex;
   flex-direction: column;
-  background-color: #F0F2F5;
-  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5;
+  font-family: "Roboto", sans-serif;
   height: 100vh;
 }
 
@@ -27,7 +27,7 @@ body {
   height: 70px;
   width: 100vw;
   padding: 0 50px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -76,10 +76,16 @@ body {
   height: 28px;
 }
 
+/* Make all SVG elements in the button as small as possible */
+.logout-btn svg {
+  width: 4px;
+  height: 4px;
+}
+
 .logo {
   font-weight: 600;
   font-size: 1.8em;
-  color: #1877F2;
+  color: #1877f2;
 }
 
 #categories {
@@ -99,7 +105,7 @@ body {
 
 .new-post-popup {
   padding: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #050505;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -108,18 +114,24 @@ body {
   margin-bottom: 40px;
 }
 
+/* Make all SVG elements in notifications as small as possible */
+.new-post-popup svg {
+  width: 4px;
+  height: 4px;
+}
+
 .posts-container {
   display: flex;
   flex-direction: column; /* Stack posts vertically */
-  align-items: center;    /* Center posts */
+  align-items: center; /* Center posts */
   gap: 20px;
   width: 100%;
 }
 
 .post {
-  width: 100%;  /* Full-width posts */
+  width: 100%; /* Full-width posts */
   padding: 20px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
@@ -127,7 +139,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 10px;  /* Reduced margin for tighter stacking */
+  margin-bottom: 10px; /* Reduced margin for tighter stacking */
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
@@ -136,13 +148,19 @@ body {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Make all SVG elements in posts as small as possible */
+.post svg {
+  width: 3px;
+  height: 3px;
+}
+
 .post-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 600px;  /* Limit width for readability */
-  background-color: #FFFFFF;
+  max-width: 600px; /* Limit width for readability */
+  background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid #ddd;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -196,37 +214,50 @@ body {
   display: flex;
 }
 
-.likes-wrapper, .comments {
+.likes-wrapper,
+.comments {
   display: flex;
   align-items: center;
   font-size: 0.8rem;
   gap: 4px;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
   border-radius: 20px;
   padding: 2px 8px;
 }
 
-.comments img {
-  height: 21px;
+/* Made SVGs even smaller than original */
+.likes-wrapper svg,
+.comments svg {
+  width: 3px; /* Even smaller than the original 6px */
+  height: 3px; /* Even smaller than the original 6px */
 }
 
 .new-post-btn {
-  background-color: #1877F2;
+  background-color: #1877f2;
   border-radius: 20px;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .new-post-btn:hover {
   background-color: #145dbf;
 }
 
+/* Make post button SVG very small */
+.new-post-btn svg {
+  width: 3px;
+  height: 3px;
+}
+
 .users {
-  margin-top: 70px;
-  margin-left: 50px;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
 .online-list {
@@ -248,18 +279,24 @@ body {
   border-radius: 50%;
 }
 
+/* Make any SVGs in user elements small */
+.user svg {
+  width: 3px;
+  height: 3px;
+}
+
 .online {
   padding: 4.4px;
-  background-color: #31A24C;
-  border: 2px solid #FFFFFF;
+  background-color: #31a24c;
+  border: 2px solid #ffffff;
   border-radius: 50%;
   margin-left: -25px;
 }
 
 .msg-notification {
   font-size: 0.7rem;
-  color: #FFFFFF;
-  background-color: #E41E3F;
+  color: #ffffff;
+  background-color: #e41e3f;
   border-radius: 50%;
   padding: 2px 5px;
   margin-left: 15px;
@@ -278,6 +315,12 @@ body {
   cursor: pointer;
 }
 
+/* Make back button SVGs small */
+.back svg {
+  width: 3px;
+  height: 3px;
+}
+
 .post-container {
   width: 50%;
   min-width: 400px;
@@ -289,9 +332,15 @@ body {
   gap: 10px;
 }
 
+/* Make any SVGs in post container small */
+.post-container svg {
+  width: 3px;
+  height: 3px;
+}
+
 .category {
   padding: 6px;
-  background-color: #E4E6EB;
+  background-color: #e4e6eb;
   color: #050505;
   border-radius: 10px;
   font-size: 0.8em;
@@ -303,6 +352,18 @@ body {
   align-items: center;
   padding: 15px;
   width: 90%;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
   border-radius: 20px;
+}
+
+/* Make send comment SVGs small */
+.send-comment svg {
+  width: 3px;
+  height: 3px;
+}
+
+/* Global SVG size reduction for any other SVGs not covered above */
+svg {
+  width: 3px !important;
+  height: 3px !important;
 }

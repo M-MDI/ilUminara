@@ -291,7 +291,7 @@ function createPosts(postdata) {
         author.className = "author"
         post.append(author)
         var img = document.createElement("img");
-        img.src = "./frontend/assets/profile7.svg"
+        img.src = "./frontend/assets/profile1.svg"
         author.appendChild(img)
         var user = document.createElement("div");
         user.className = "post-username"
@@ -315,7 +315,7 @@ function createPosts(postdata) {
         likesWrapper.className = "likes-wrapper"
         likesDislikesWrapper.appendChild(likesWrapper)
         var likesImg = document.createElement("img");
-        likesImg.src = "./frontend/assets/like3.svg"
+        likesImg.src = "./frontend/assets/like.svg"
         likesWrapper.appendChild(likesImg)
         var postlikes = document.createElement("div");
         postlikes.className = "likes"
@@ -325,7 +325,7 @@ function createPosts(postdata) {
         dislikesWrapper.className = "likes-wrapper dislike"
         likesDislikesWrapper.appendChild(dislikesWrapper)
         var dislikesImg = document.createElement("img");
-        dislikesImg.src = "./frontend/assets/dislike4.svg"
+        dislikesImg.src = "./frontend/assets/dislike.svg"
         dislikesWrapper.appendChild(dislikesImg)
         var postdislikes = document.createElement("div");
         postdislikes.className = "dislike"
@@ -383,7 +383,7 @@ function createUsers(userdata, conn) {
         }
 
         var userImg = document.createElement("img");
-        userImg.src = "./frontend/assets/profile4.svg"
+        userImg.src = "./frontend/assets/profile1.svg"
         user.appendChild(userImg)
         var chatusername = document.createElement("p");
         chatusername.innerText = username

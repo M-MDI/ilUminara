@@ -1,186 +1,28 @@
-/* Facebook-style Sign-in Form */
-.signin-container {
-  display: flex;
-  min-height: 70vh;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f2f5;
-  padding: 20px;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.signin-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 980px;
-  width: 100%;
-}
-
-.signin-left {
-  max-width: 500px;
-  padding-right: 32px;
-}
-
-.signin-logo {
-  margin-bottom: 16px;
-}
-
-.signin-logo img {
-  width: 240px;
-}
-
-.signin-tagline {
-  font-size: 28px;
-  line-height: 32px;
-  color: #1c1e21;
-  font-weight: normal;
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
-.signin {
-  width: 396px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+body {
   display: flex;
   flex-direction: column;
-}
-
-.signin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.signin label {
-  display: none; /* Facebook doesn't show labels above inputs */
-}
-
-.signin-input {
-  height: 52px;
-  border: 1px solid #dddfe2;
-  border-radius: 6px;
-  padding: 14px 16px;
-  font-size: 17px;
-  color: #1d2129;
-  background-color: #ffffff;
-  box-shadow: none;
-}
-
-.signin-input:focus {
-  outline: none;
-  border-color: #1877f2;
-  box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
-}
-
-.signin-input::placeholder {
-  color: #90949c;
-}
-
-.signin .signin-btn {
-  background-color: #1877f2;
-  border: none;
-  border-radius: 6px;
-  font-size: 20px;
-  line-height: 48px;
-  padding: 0 16px;
-  width: 100%;
-  font-weight: bold;
-  color: #ffffff;
-  cursor: pointer;
-  margin: 16px 0;
-  box-shadow: none;
-}
-
-.signin .signin-btn:hover {
-  background-color: #166fe5;
-  border: none;
-  box-shadow: none;
-  transform: none;
-}
-
-.forgotten-password {
-  margin: 16px 0;
-  text-align: center;
-}
-
-.forgotten-password a {
-  color: #1877f2;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.forgotten-password a:hover {
-  text-decoration: underline;
-}
-
-.divider {
-  border-bottom: 1px solid #dadde1;
-  margin: 20px 0;
-}
-
-.create-account-btn {
-  background-color: #42b72a;
-  border: none;
-  border-radius: 6px;
-  font-size: 17px;
-  line-height: 48px;
-  padding: 0 16px;
-  width: fit-content;
-  font-weight: bold;
-  color: #ffffff;
-  cursor: pointer;
-  margin: 6px auto;
-  box-shadow: none;
-}
-
-.create-account-btn:hover {
-  background-color: #36a420;
-}
-
-.signin-footer {
-  font-size: 14px;
+  background-color: #f0f2f5;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100vh;
   color: #1c1e21;
-  text-align: center;
-  margin-top: 28px;
 }
 
-.not-signedup {
-  margin-top: 20px;
-  text-align: center;
-  color: #1c1e21;
-  font-size: 14px;
+.profile {
+  color: #050505;
 }
 
-#signup-link {
-  font-weight: 600;
-  color: #1877f2;
-  cursor: pointer;
-}
-
-#signup-link:hover {
-  text-decoration: underline;
-}
-
-.error-message {
-  color: #f02849;
-  font-size: 13px;
-  margin-top: 4px;
-  padding: 8px 12px;
+#video-bg {
   display: none;
 }
 
-.error-message.show {
-  display: block;
-  background-color: #ffebe8;
-  border-radius: 4px;
-  border: 1px solid #ffa8a8;
-}
-
-.signup-nav {
+/* Header/Nav styling - Facebook blue header */
+.logout-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,71 +30,444 @@
   width: 100%;
   padding: 0 16px;
   background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   border-bottom: 1px solid #dddfe2;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.signup-btn {
-  background-color: #42b72a;
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-panel {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  margin-top: 70px;
+}
+
+.content-wrapper {
+  height: calc(100vh - 56px);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 16px;
+  margin-top: 56px;
+}
+
+.mid-section {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.right-panel {
+  height: 100%;
+  width: 360px;
+  padding: 8px 16px;
+}
+
+.logout-btn {
+  background-color: #e4e6eb;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  padding: 0 16px;
-  height: 36px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #d8dadf;
+}
+
+.logout-btn img {
+  height: 20px;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 2em;
+  color: #1877f2;
+}
+
+#categories {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #050505;
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.new-post-notif-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.new-post-popup {
+  padding: 10px 16px;
+  background-color: #ffffff;
+  color: #1877f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: fixed;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-post-popup:hover {
+  background-color: #f0f2f5;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.post {
+  width: 100%;
+  padding: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.post:hover {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 680px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #050505;
+  padding: 4px 0;
+}
+
+.author {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #65676b;
+  font-size: 0.9rem;
+  padding: 12px 16px;
+}
+
+.author img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-username {
+  color: #050505;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.post-timestamp {
+  font-size: 0.8rem;
+  color: #65676b;
+}
+
+.post-body {
+  padding: 4px 16px 16px;
+  color: #1c1e21;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.comments-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px 8px;
+  border-top: 1px solid #e4e6eb;
+  margin-top: 4px;
+}
+
+.likes-dislikes-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.likes-wrapper,
+.comments {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: #65676b;
+  font-weight: 500;
+}
+
+.likes-wrapper:hover,
+.comments:hover {
+  background-color: #f0f2f5;
+}
+
+/* Facebook uses icons rather than tiny SVGs */
+.likes-wrapper svg{
+  width: 1px;
+  height: 1px;
+  fill: #65676b;
+}
+.comments svg {
+  width: 18px;
+  height: 18px;
+  fill: #65676b;
+}
+
+.new-post-btn {
+  background-color: #1877f2;
+  border-radius: 12px;
+  border: none;
   color: #ffffff;
+  padding: 4px 6px;
+  font-weight: 500;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.new-post-btn:hover {
+  background-color: #0871fb;
+}
+
+.new-post-btn svg {
+  width: 2px;
+  height: 2px;
+  fill: white;
+}
+
+.users {
+  margin-top: 20px;
+  padding: 8px;
+}
+
+.online-list {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #65676b;
+  margin-bottom: 12px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 4px;
   cursor: pointer;
 }
 
-.signup-btn:hover {
-  background-color: #36a420;
+.user:hover {
+  background-color: #f0f2f5;
 }
 
-.shake {
-  animation: shake 0.5s;
+.user img {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-@keyframes shake {
-  10%, 90% {
-    transform: translateX(-5px);
-  }
-  
-  20%, 80% {
-    transform: translateX(5px);
-  }
-  
-  30%, 50%, 70% {
-    transform: translateX(-10px);
-  }
-  
-  40%, 60% {
-    transform: translateX(10px);
-  }
-  
-  0%, 100% {
-    transform: translateX(0);
-  }
+.online {
+  position: relative;
+  padding: 4px;
+  background-color: #31a24c;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  margin-left: -14px;
+  margin-top: 20px;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 900px) {
-  .signin-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .signin-left {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-right: 0;
-  }
-  
-  .signin {
-    width: 100%;
-    max-width: 396px;
-  }
-  
-  .signin-tagline {
-    font-size: 24px;
-  }
+.user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.msg-notification {
+  font-size: 0.7rem;
+  color: #ffffff;
+  background-color: #e41e3f;
+  border-radius: 50%;
+  padding: 2px 6px;
+  margin-left: auto;
+}
+
+.back {
+  display: flex;
+  width: 100%;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+.back img {
+  height: 20px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.back-text {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.post-container {
+  width: 100%;
+  max-width: 680px;
+  margin: 56px auto 0;
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.category {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #e4e6eb;
+  color: #050505;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.send-comment {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  width: 1%;
+  background-color: #f0f2f5;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+.comment-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.create-post-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.create-post-box img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.create-post-input {
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  color: #65676b;
+  cursor: pointer;
+  flex: 1;
+}
+
+.create-post-input:hover {
+  background-color: #e4e6eb;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  margin-top: 12px;
+  border-top: 1px solid #e4e6eb;
+}
+
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  color: #65676b;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.post-action:hover {
+  background-color: #f0f2f5;
+}
+
+.post-action svg {
+  width: 20px;
+  height: 20px;
+  fill: #65676b;
 }
