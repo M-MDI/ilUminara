@@ -574,7 +574,7 @@ body::before {
 /* CSS variables for dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #005b99;
+    --bg: #abcde5;
     --card-bg: #005b77;
     --primary: #a3c1da;
   }
