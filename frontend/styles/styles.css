@@ -5,7 +5,7 @@
 }
 
 :root {
-  /* Simplified Color Palette */
+  /* Color Palette */
   --primary: #a3c1da;
   --bg: #f6f8d5;
   --card-bg: #ffffff;
@@ -139,7 +139,7 @@ body::before {
   padding: 8px;
   cursor: pointer;
   transition: all var(--transition);
-  color: var(--white);
+  color: var(--bg);
 }
 
 .logout-btn:hover {
@@ -155,7 +155,7 @@ body::before {
 .logo {
   font-weight: 600;
   font-size: 1.8em;
-  color: var(--white);
+  color: var(--bg);
   text-shadow: 0 2px 4px rgba(154, 154, 154, 0.2);
   transform: translateZ(5px);
   letter-spacing: 1px;
@@ -314,7 +314,7 @@ body::before {
   height: auto;
   margin: 15px 0;
   overflow-y: auto;
-  color: var(--text);
+  color: var(--primary);
   transform: translateZ(2px);
   line-height: 1.5;
 }
@@ -371,7 +371,7 @@ body::before {
   align-items: center;
   gap: 6px;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(225, 48, 108, 0.3);
+  box-shadow: 0 4px 10px rgba(163, 193, 218, 0.3);
   transform: translateZ(8px);
   letter-spacing: 0.5px;
   font-size: 0.8rem;
@@ -404,7 +404,7 @@ body::before {
   align-items: center;
   gap: 0.8rem;
   margin: 15px 0;
-  color: var(--text);
+  color: var(--primary);
   transition: background var(--transition);
   transform: translateZ(0);
   padding: 0.6rem;
@@ -574,7 +574,7 @@ body::before {
 /* CSS variables for dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #005B99(207 4% 65%);
+    --bg: #005b99;
     --card-bg: #005b77;
     --primary: #a3c1da;
   }
