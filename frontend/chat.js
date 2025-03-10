@@ -1,17 +1,5 @@
 var log = document.querySelector(".chat")
 
-// function appendLog(container, msg, date) {
-//     var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
-//     log.prepend(container); // Prepend the container instead of appending
-//     container.append(msg);
-//     msg.append(date);
-   
-//     if (doScroll) {
-//         log.scrollTop = log.scrollHeight - log.clientHeight;
-//     }
-// }
-
-// 
 function appendLog(container, msg, date, prepend = false) {
     var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
   

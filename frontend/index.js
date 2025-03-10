@@ -247,6 +247,7 @@ function createComments(commentsdata) {
         commentWrapper.className = "comment-wrapper"
         commentsContainer.appendChild(commentWrapper)
         var userImg = document.createElement("img");
+        userImg.className = "src"
         userImg.src = "./frontend/assets/profile7.svg"
         commentWrapper.appendChild(userImg)
         var comment = document.createElement("div");
@@ -339,7 +340,7 @@ function createPosts(postdata) {
         comments.appendChild(commentsImg)
         var comment = document.createElement("div");
         comment.className = "comment"
-        comment.innerText = (currComments === null) ? "0 Comments" : currComments.length + " Comments"
+        comment.innerText = (currComments === null) ? "0 Comments" : currComments.length 
         comments.appendChild(comment)
 
         post.addEventListener("click", async function(e) {
@@ -349,7 +350,7 @@ function createPosts(postdata) {
 
             createPost(allPosts.filter(p => {return p.id == currPost})[0])
             createComments(currComments)
-            document.getElementById('post-comments').innerHTML = (currComments === null) ? "0 Comments" : currComments.length + " Comments"
+            document.getElementById('post-comments').innerHTML = (currComments === null) ? "0 Comments" : currComments.length
         
             postsContainer.style.display = "none"
             postContainer.style.display = "flex"
