@@ -1,5 +1,3 @@
-
-
 const postsContainer = document.querySelector('.posts-container');
 const createPostContainer = document.querySelector(".create-post-container");
 const postContainer = document.querySelector(".post-container");
@@ -47,6 +45,31 @@ async function postData(url = '', data = {}) {
 
   
 
+/*************  ✨ Codeium Command 🌟  *************/
+/**
+ * POST fetch function
+ * @param {string} url - URL to send the request to
+ * @param {object} data - Data to send in the request body
+ * @returns {Promise} Promise that resolves to the response JSON
+ */
+async function postData(url = '', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    console.log('posted')
+
+    return response.json()
+}
+
+/**
+ * GET fetch function
+ * @param {string} url - URL to send the request to
+ * @returns {Promise} Promise that resolves to the response JSON
+ */
 //GET fetch function
 async function getData(url = '') {
     console.log('getting', url)
@@ -56,6 +79,7 @@ async function getData(url = '') {
 
     return response.json()
 }
+/******  9edf3df1-ba01-4ae9-9b25-7a169c28accc  *******/
 
 
 async function getPosts() {

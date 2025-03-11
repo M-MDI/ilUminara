@@ -185,10 +185,8 @@ body {
 .likes-dislikes-wrapper {
   display: flex;
   gap: 15px;
-  .src {
-  max-width: 30px;
-  height: 30px;
-}
+  max-width: 5px;
+  height: 5px;
 }
 
 .likes-wrapper,
