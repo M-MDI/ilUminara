@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/styleAll.css">
+    <link rel="stylesheet" href="/public/css/navbar.css">
+    <link rel="stylesheet" href="/public/css/posts.css">
+    <link rel="stylesheet" href="/public/css/LoginSys.css">
+    <link rel="stylesheet" href="/public/css/login-required.css">
+    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+    <title>Forum</title>
+</head>
+
+<body>
+    <div class="homepage">
+        <nav class="topNav" aria-label="Main navigation">
+            <div>
+                <a href="/"><img class="logo" src="/public/img/RT-Forum.png" height="65" alt="RT Forum Logo"></a>
+            </div>
+            <div class="navMenu">
+                <button id="createPost" class="createPost cursor" onclick="showCreatePostPopup()" onKeyPress="if(event.key==='Enter')showCreatePostPopup()">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Create Post</span>
+                </button>
+
+                <button id="isLog-gedin" class="btn btnNotify none" onclick="toggleMenu('popBackground2' , 'popCreate2')" onKeyPress="if(event.key==='Enter')toggleMenu('popBackground2' , 'popCreate2')">
+                    <span>login</span>
+                </button>
+                <div id="topImg" class="topImg cursor">
+                    <a id="profileImgTop">
+                        <img id="profileImgTop" src="/public/img/default.avif" alt="Profile">
+                    </a>
+                </div>
+                <h3 class="username" aria-live="polite">User</h3>
+            </div>
+        </nav>
+        <div class="container">
+            <nav class="leftNav" aria-label="Side navigation">
+                <div class="topSide">
+                    <div class="leftMenu">
+                        <button onclick="returnToHome()" class="cursor homebtn" onKeyPress="if(event.key==='Enter')returnToHome()">
+                            <i class="fa-solid fa-house"></i>
+                            <span>Home</span>
+                        </button>
+                        <button onclick="window.location.href='/?userLiked=1'" id="likedpost" class="cursor homebtn none" onKeyPress="if(event.key==='Enter')window.location.href='/?userLiked=1'">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            <span>My Liked Posts</span>
+                        </button>
+                    </div>
+                    <div class="Hline"></div>
+                    <!-- filter part -->
+                    <button onclick="toggleCateg()" class="filterCateg" onKeyPress="if(event.key==='Enter')toggleCateg()">
+                        <div><i class="fa-solid fa-list"></i> CATEGORIES</div>
+                        <div>
+                            <i id="uparrow" class="fa-solid fa-chevron-up none"></i>
+                            <i id="downarrow" class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div id="filterCategContent" class="">
+                    </div>
+                </div>
+                <div class="downSide">
+                    <div class="Hline"></div>
+                    <div class="rightMenu">
+                        <button id="cursorLogout" class="cursor" onclick="logout()" onKeyPress="if(event.key==='Enter')logout()">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </button>
+                    </div>
+
+                </div>
+            </nav>
+            <noscript>
+                <p>JavaScript is disabled in your browser. Please enable it to use this site properly.</p>
+            </noscript>
+            <div id="login-required-overlay" class="login-required-overlay none">
+                <h2>Login Required</h2>
+                <p>You need to be logged in to view and interact with posts. Please login or register to continue.</p>
+                <button class="login-btn" onclick="toggleMenu('popBackgroundLogin', 'popCreateLogin')">Login / Register</button>
+            </div>
+            <div class="centerHome" id="centerHome">
+                <div class="ChoosedCateg">
+                </div>
+            </div>
+            <nav class="rightNav" aria-label="Users navigation">
+                <div id="users_contenar" class="users_contenar">
+
+                </div>
+
+                <div id="chatbtninput" class="chatbtninput none">
+                    <div class="close">
+                        <span class="chat-title"></span>
+                        <button class="fa-solid fa-circle-xmark" onclick="CloseChat()" onKeyPress="if(event.key==='Enter')CloseChat()" aria-label="Close chat"></button>
+                    </div>
+                <div id="chat" class="chat none"></div>
+                <div class="sendInput">
+                    <input id="messageInput"  maxlength="1000" class="inputMessgae" type="text">
+                    <button id="sendBtn" class="send fa-solid fa-paper-plane"onclick="sendMessage(this)"></button>
+                </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- this part for popup create-->
+    <div id="popBackground" class="popback none" onclick="toggleMenu('popBackground' , 'popCreate')" onKeyPress="if(event.key==='Enter')toggleMenu('popBackground' , 'popCreate')" role="dialog" aria-modal="true"></div>
+    <div id="popCreate" class="popbody none w3-animate-zoom">
+        <div class="popTimes">
+            <button onclick="toggleMenu('popBackground' , 'popCreate')" class="close-button" aria-label="Close">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div class="addPost">
+            <form id="CreatePostForm" enctype="multipart/form-data" autocomplete="off">
+                <div class="postProfile">
+                    <!-- Profile info added dynamically via JS -->
+                </div>
+                <div class="addpostTitle">
+                    <input id="TitleCreatePost" maxlength="150" type="text" autocomplete="off"
+                        placeholder="What's on your mind...">
+                </div>
+                <div class="addpostContent">
+                    <textarea name="" maxlength="2000" id="ContentCreatePost" autocomplete="off"
+                        placeholder="Write your post content here..."></textarea>
+                </div>
+                <div class="category-wrapper">
+                    <div class="selectBox" onclick="showCheckboxes('checkboxes')">
+                        <select name="ChooseCategories">
+                            <option>Choose Categories</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes" class="checkboxes none"></div>
+                </div>
+                <div class="postBtn">
+                    <button type="submit" id="CreeatPostBtn" class="btn btnNotify">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- end popup -->
+
+
+    <div id="popBackgroundLogin" class="popbackLogin none"></div>
+    <div id="popCreateLogin" class="popbody w3-animate-zoom none">
+
+        <div class="container-login-signup">
+            <!-- login -->
+            <form autocomplete="off">
+                <div class="form-container log-in">
+                    <h1>log-in</h1>
+                    <input class="input-login" placeholder="username or email" maxlength="40" type="" id="emailL">
+                    <input class="input-login" placeholder="password" maxlength="35" type="password" id="passwordL">
+                    <input class="input-login" type="submit" id="submit-login" value="Login">
+                </div>
+            </form>
+            <div class="switch log-in">
+                <p>Don't have an account?</p>
+                <button id="to_register" class="switchBtn" id="switchBtn">Register</button>
+            </div>
+            <!-- register -->
+            <form autocomplete="off">
+                <div class="form-container register">
+                    <h1>register</h1>
+                    <input class="input-login" maxlength="20" placeholder="user name" type="text" id="usernameS">
+                    <input class="input-login" maxlength="20" placeholder="your age" type="number" id="ageS">
+                    
+                    <div class="mydict">
+                        <div>
+                            <label>
+                                <input type="radio" name="radio" value="Men" checked>
+                                <span>Male</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="radio" value="Women">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <input class="input-login" maxlength="20" placeholder="first name" type="text" id="firstnameS">
+                    <input class="input-login" maxlength="20" placeholder="last name" type="text" id="lastnameS">
+                    <input class="input-login" maxlength="40" placeholder="email" type="email" id="emailS">
+                    <input class="input-login" maxlength="35" placeholder="password" type="password" id="paswordS">
+                    <br>
+                    <input class="input-login" type="submit" id="submit-register" value="Register">
+                </div>
+            </form>
+            <div class="switch register">
+                <p>Already have an account?</p>
+                <button id="to_log_in" class="switchBtn" id="switchBtn">log in</button>
+            </div>
+        </div>
+    </div>
+    <!-- end popup -->
+
+    <script src="/public/js/categories.js"></script>
+    <script src="/public/js/posts.js"></script>
+    <script src="/public/js/comments.js"></script>
+    <script src="/public/js/loginSys.js"></script>
+    <script src="/public/js/socket.js"></script>
+    <script src="/public/js/index.js"></script>
+</body>
+
+</html>

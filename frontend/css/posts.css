@@ -1,0 +1,643 @@
+.myPosts {
+  background-color: var(--so-container-bg);
+  border: 1px solid var(--so-border-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.myPosts:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* category */
+.addCategory {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1001;
+}
+
+.category-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 1015; /* Higher than post button */
+  margin-bottom: 24px;
+}
+
+.selectBox {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  z-index: 1015;
+}
+
+.selectBox select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--so-text-primary);
+  background-color: var(--so-background);
+  border: 1px solid var(--so-border-color);
+  border-radius: 8px;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding-right: 32px; /* Space for the dropdown arrow */
+}
+
+.selectBox::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--so-text-secondary);
+  pointer-events: none;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.checkboxes {
+  position: absolute;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  background-color: var(--so-container-bg);
+  border: 1px solid var(--so-border-color);
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1020; /* Highest z-index */
+}
+
+.checkboxes::-webkit-scrollbar {
+  width: 8px;
+}
+
+.checkboxes::-webkit-scrollbar-track {
+  background: var(--so-background);
+  border-radius: 8px;
+}
+
+.checkboxes::-webkit-scrollbar-thumb {
+  background: var(--so-border-color);
+  border-radius: 8px;
+}
+
+.checkboxes::-webkit-scrollbar-thumb:hover {
+  background: var(--so-text-secondary);
+}
+
+.checkboxes.show {
+  display: block;
+}
+
+.checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--so-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkboxes label i {
+  width: 16px;
+  color: var(--so-text-secondary);
+}
+
+.checkboxes label:hover {
+  background-color: var(--so-nav-active);
+}
+
+.checkboxes label:hover i {
+  color: var(--so-accent-blue);
+}
+
+.checkboxes input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--so-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  appearance: none;
+  background-color: var(--so-background);
+}
+
+.checkboxes input[type="checkbox"]:checked {
+  background-color: var(--so-accent-blue);
+  border-color: var(--so-accent-blue);
+}
+
+.checkboxes input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* end category */
+
+.postProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.postImg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--so-border-color);
+}
+
+.usernameProfil {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--so-text-primary);
+}
+
+.threePoint {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  cursor: pointer;
+}
+
+.addpostTitle input {
+  width: 100%;
+  padding: 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--so-text-primary);
+  background: var(--so-container-bg);
+  border: none;
+  border-bottom: 2px solid var(--so-border-color);
+  transition: border-color 0.2s ease;
+  position: relative;
+  z-index: 1001;
+}
+
+.addpostTitle input:focus {
+  outline: none;
+  border-color: var(--so-accent-blue);
+}
+
+.addpostTitle textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 15px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+}
+
+.addpostContent, .addpostTitle {
+  margin: auto;
+}
+
+.addpostContent textarea {
+  width: 100%;
+  min-height: 250px;
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--so-text-primary);
+  background-color: var(--so-background);
+  border: 1px solid var(--so-border-color);
+  border-radius: 8px;
+  resize: vertical;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1001;
+}
+
+.addpostContent textarea:focus {
+  outline: none;
+  border-color: var(--so-accent-blue);
+  box-shadow: 0 0 0 4px rgba(10, 149, 255, 0.1);
+}
+
+/* Post button styling */
+.postBtn {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--so-border-color);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  border-top: 1px solid var(--so-border-color);
+  margin: 0 -14px;
+  z-index: 1005;
+}
+
+.postBtn button {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: var(--so-accent-blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.postBtn button:hover {
+  background-color: var(--so-accent-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10, 149, 255, 0.2);
+}
+
+.postBtn button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.postDate {
+  font-size: 12px;
+  color: var(--so-text-secondary);
+  margin-top: 4px;
+}
+
+.postTitle, .postContent {
+  margin: 15px;
+}
+
+.postTitle h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--so-text-primary);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.postContent {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--so-text-primary);
+  margin-bottom: 24px;
+  word-wrap: break-word;
+}
+
+pre {
+  white-space: normal;
+}
+
+.reaction {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background-color: var(--so-background);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: default; /* Override parent cursor */
+}
+
+.reaction > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--so-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.reaction > div:hover {
+  color: var(--so-text-primary);
+}
+
+.liked {
+  color: var(--so-accent-blue) !important;
+}
+
+.disliked {
+  color: var(--so-danger) !important;
+}
+
+.popback {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popbody {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 700px;
+  background-color: var(--so-container-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#popCreate {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 700px;
+  background-color: var(--so-container-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.popTimes {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1005;
+  cursor: pointer;
+}
+
+.popTimes span {
+  font-size: 24px;
+  color: var(--so-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 1005;
+}
+
+.popTimes span:hover {
+  color: var(--so-text-primary);
+}
+
+.addPost {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background-color: var(--so-container-bg);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1001;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--so-container-bg);
+  height: 100%;
+  overflow-y: auto;
+}
+
+/*------------------ Btn alert style ---------------------*/
+
+.btnAlert {
+  font-family: "Font Awesome\ 6 Free";
+  font-size: 22px;
+}
+
+.btn-success {
+  background-color: #0f5132;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #842029;
+  color: #fff;
+}
+
+.btn-info {
+  background-color: #084298;
+  color: #fff;
+}
+
+.btn-caution {
+  background-color: #664d03;
+  color: #fff;
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/*------------------------ alert style ----------------------*/
+
+.alert {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.alert-container {
+  background-color: var(--so-container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+  min-width: 300px;
+}
+
+.alert-message {
+  flex: 1;
+  font-size: 14px;
+  color: var(--so-text-primary);
+}
+
+.alert-success {
+  border-left: 4px solid #4CAF50;
+}
+
+.alert-danger {
+  border-left: 4px solid #f44336;
+}
+
+.alert-info {
+  border-left: 4px solid var(--so-accent-blue);
+}
+
+.alert-caution {
+  border-left: 4px solid #ff9800;
+}
+
+.btn-close {
+  color: var(--so-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-close:hover {
+  color: var (--so-text-primary);
+}
+
+.showComments {
+  margin: 16px 0 0 0;
+  padding: 16px;
+  background-color: var(--so-background);
+  border-radius: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  position: relative; /* Add position relative */
+  z-index: 2; /* Ensure comments appear above the post */
+  cursor: default; /* Remove pointer cursor from comments section */
+}
+
+.showComments.active {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.comment {
+  background-color: var(--so-container-bg);
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 3px solid var(--so-accent-blue);
+  position: relative; /* Add position relative */
+  z-index: 3; /* Ensure comments appear above the showComments container */
+}
+
+.comment .postContent {
+  font-size: 14px;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+.comment .postProfile {
+  padding: 0 0 8px 0;
+  margin: 0;
+  border-bottom: 1px solid var(--so-border-color);
+}
+
+.comment .postImg img {
+  width: 32px;
+  height: 32px;
+}
+
+.comment .postDate {
+  font-size: 12px;
+  color: var(--so-text-secondary);
+}
+
+.comment .reaction {
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+}
+
+.seeMoreBtn {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--so-accent-blue);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.seeMoreBtn:hover {
+  color: var(--so-accent-blue-hover);
+}
+
+.guestAddComment {
+  text-align: center;
+  padding: 24px;
+}
+
+.guestAddComment h3 {
+  font-size: 16px;
+  color: var(--so-text-primary);
+  margin-bottom: 16px;
+}
+
+.addComment {
+  margin-top: 16px;
+}
+
+.addComment textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid var(--so-border-color);
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin: 12px 0;
+}
+
+.addComment textarea:focus {
+  outline: none;
+  border-color: var(--so-accent-blue);
+  box-shadow: 0 0 0 4px rgba(10, 149, 255, 0.1);
+}

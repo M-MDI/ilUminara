@@ -1,0 +1,115 @@
+.topNav {
+  border-bottom: 1px solid var(--so-border-color);
+  height: 60px;
+  z-index: 100;
+  background-color: var(--so-container-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navMenu a {
+  font-size: 14px;
+  color: var(--so-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navMenu a:hover {
+  color: var(--so-text-primary);
+}
+
+.topImg img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid var(--so-border-color);
+  transition: border-color 0.2s ease;
+}
+
+.topImg img:hover {
+  border-color: var(--so-accent-blue);
+}
+
+.notification {
+  font-size: 18px;
+  color: var(--so-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.notification:hover {
+  color: var(--so-accent-blue);
+}
+
+.createPost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: var(--so-accent-blue);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.createPost:hover {
+  background-color: var(--so-accent-blue-hover);
+  box-shadow: 0 0 0 4px rgba(10, 149, 255, 0.15);
+}
+
+.createPost i {
+  font-size: 14px;
+}
+
+.Fcateg {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+  color: var(--so-text-primary);
+  font-size: 13px;
+}
+
+.Fcateg i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+  color: var(--so-text-secondary);
+}
+
+.Fcateg:hover {
+  background-color: var(--so-nav-active);
+}
+
+.special-category {
+  color: var(--so-accent-blue);
+  font-weight: 500;
+  border-left: 2px solid var(--so-accent-blue);
+}
+
+.special-category i {
+  color: var(--so-accent-blue);
+}
+
+.category-divider {
+  height: 1px;
+  background-color: var(--so-border-color);
+  margin: 8px 4px;
+}
