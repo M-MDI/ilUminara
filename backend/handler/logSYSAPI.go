@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -186,14 +185,4 @@ func LogoutHandlerApi(res http.ResponseWriter, req *http.Request) {
 		Path:   "/",
 	})
 	jsonResponse(res, http.StatusOK, "Logout successful")
-}
-
-func jsonResponse(w http.ResponseWriter, status int, message any) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	err := json.NewEncoder(w).Encode(message)
-	if err != nil {
-		fmt.Println("ERROR ENCODE DATA : ", err)
-		return
-	}
 }
