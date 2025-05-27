@@ -3,12 +3,15 @@ package forum
 import (
 	"database/sql"
 	"fmt"
+	"os"
+	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 const (
-	DatabasePath = "./backend/database/database.db"
+	// Use /tmp directory for Vercel compatibility
+	DatabasePath = "/tmp/database.db"
 	ErrOpenDB    = "OPEN ERROR: %v"
 	ErrDBOpen    = "Failed to open the database"
 	ErrExecDB    = "Execute failed: %s"
@@ -16,6 +19,10 @@ const (
 )
 
 func CreateDataBase() {
+	// Ensure directory exists
+	dir := filepath.Dir(DatabasePath)
+	os.MkdirAll(dir, 0755)
+
 	db, err := sql.Open("sqlite3", DatabasePath)
 
 	CheckError("open file database", err)
@@ -171,7 +178,6 @@ func SelectOneRow(query string, args ...any) (*sql.Row, error) {
 	defer db.Close()
 	return db.QueryRow(query, args...), nil
 }
-
 
 func ExecQuery(query string, args ...any) (sql.Result, error) {
 	db, err := sql.Open("sqlite3", DatabasePath)

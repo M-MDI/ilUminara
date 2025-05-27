@@ -1,4 +1,4 @@
-package handler
+package handler // Changed from 'package handler' to 'package main'
 
 import (
 	"errors"
@@ -34,7 +34,13 @@ func main() {
 		forum.CreateDataBase()
 	}
 
-	addr := ":8080"
+	// Get port from environment variable for Vercel compatibility
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default port if not specified
+	}
+
+	addr := ":" + port
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/public/", handleStaticFile)
@@ -43,7 +49,7 @@ func main() {
 		HandlerFunc(res, req)
 	})
 
-	fmt.Println("Server started...")
+	fmt.Printf("Server started on port %s...\n", port)
 	err := http.ListenAndServe(addr, mux)
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("server closed\n")
